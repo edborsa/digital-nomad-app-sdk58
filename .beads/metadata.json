@@ -1,0 +1,7 @@
+{
+  "database": "dolt",
+  "backend": "dolt",
+  "dolt_mode": "embedded",
+  "dolt_database": "digital_nomad_app",
+  "project_id": "8304d379-f227-4795-953e-4060617467bd"
+}
