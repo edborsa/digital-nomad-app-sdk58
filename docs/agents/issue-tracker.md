@@ -23,7 +23,7 @@ Run `bd show <id>` and `bd comments <id>`. The user will normally pass the issue
 Used by `/wayfinder`. The **map** is an epic with one **child** issue per ticket.
 
 - **Map**: an epic whose description holds the Notes / Decisions-so-far / Fog body. Update it with `bd update <epic-id> --body-file -`.
-- **Child ticket**: `bd create "<question>" --parent <epic-id> --body-file -`. The ticket type (`research`/`prototype`/`grilling`/`task`) is a `type:<name>` label.
+- **Child ticket**: `bd create "<question>" --parent <epic-id> --body-file -`. The ticket type (`research`/`prototype`/`grilling`/`task`) is a `wayfinder:<type>` label; the map itself carries `wayfinder:map`.
 - **Blocking**: `bd dep add <child-id> <blocker-id>`. A ticket is unblocked when every blocker is closed.
 - **Frontier**: `bd ready --parent <epic-id> --unassigned`; first result wins.
 - **Claim**: `bd update <id> --claim` before any work.
