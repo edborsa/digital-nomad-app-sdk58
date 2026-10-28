@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
   backdrop: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
     backgroundColor: "rgba(0,0,0,0.7)",
   },
 });

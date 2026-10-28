@@ -128,7 +128,7 @@ function AccordionBody({
       <View
         style={styles.body}
         onLayout={(e) => {
-          height.value = e.nativeEvent.layout.height;
+          height.set(e.nativeEvent.layout.height);
         }}
       >
         <Text>{description}</Text>

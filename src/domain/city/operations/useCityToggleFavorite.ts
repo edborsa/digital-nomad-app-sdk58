@@ -1,18 +1,23 @@
 import { useAppMutation } from "@/src/infra/operations/useAppMutation";
 import { useRepository } from "@/src/infra/repositories/RepositoryProvider";
 import { useQueryClient } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { City } from "../City";
 import { CityToggleFavoriteParams } from "../ICityRepo";
 
 export function useCityToggleFavorite(params: Pick<City, "id" | "isFavorite">) {
   const [isFavorite, setIsFavorite] = useState(params.isFavorite);
+  const [prevParamsIsFavorite, setPrevParamsIsFavorite] = useState(
+    params.isFavorite,
+  );
   const { city } = useRepository();
   const queryClient = useQueryClient();
 
-  useEffect(() => {
+  // Follow the server value when it changes, adjusting state during render
+  if (params.isFavorite !== prevParamsIsFavorite) {
+    setPrevParamsIsFavorite(params.isFavorite);
     setIsFavorite(params.isFavorite);
-  }, [params.isFavorite]);
+  }
 
   const mutation = useAppMutation<void, CityToggleFavoriteParams>({
     mutationFn: () => toggleFavorite(),

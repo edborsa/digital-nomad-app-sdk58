@@ -2,6 +2,7 @@ import {
   fireEvent,
   screen,
   waitForElementToBeRemoved,
+  within,
 } from "@testing-library/react-native";
 import { renderApp } from "../test-utils/renderApp";
 
@@ -59,6 +60,36 @@ describe("integration: Home", () => {
     expect(await screen.findByText(/carregando cidades/i)).toBeOnTheScreen();
     expect(
       await screen.findByText(/não há cidades no momento/i),
+    ).toBeOnTheScreen();
+  });
+
+  it("should revert the favorite star when favoriting fails", async () => {
+    let rejectToggle: (error: Error) => void = () => {};
+    renderApp({
+      isAuthenticated: true,
+      repositories: {
+        city: {
+          toggleFavorite: () =>
+            new Promise((_, reject) => {
+              rejectToggle = reject;
+            }),
+        },
+      },
+    });
+
+    const favoriteButton = await screen.findByTestId(
+      "favorite-button-rio-de-janeiro",
+    );
+    fireEvent.press(favoriteButton);
+
+    expect(
+      await within(favoriteButton).findByTestId("Favorite-fill"),
+    ).toBeOnTheScreen();
+
+    rejectToggle(new Error("server is down!"));
+
+    expect(
+      await within(favoriteButton).findByTestId("Favorite-outline"),
     ).toBeOnTheScreen();
   });
 });

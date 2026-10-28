@@ -4,7 +4,7 @@ import { CitiesGroupedByCategoryItem } from "@/src/ui/components/CitiesGroupedBy
 import { Screen } from "@/src/ui/components/Screen";
 import { Separator } from "@/src/ui/components/Separator";
 import { useAppTheme } from "@/src/ui/theme/useAppTheme";
-import { useScrollToTop } from "@react-navigation/native";
+import { useScrollToTop } from "expo-router";
 import { useRef } from "react";
 import { FlatList, ListRenderItemInfo } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";

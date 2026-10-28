@@ -57,6 +57,8 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
   }
 
   useEffect(() => {
+    // The Session store (digital-nomad-app-2rj.17) replaces this provider
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     loadAuthUser();
   }, []);
 

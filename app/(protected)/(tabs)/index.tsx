@@ -11,7 +11,7 @@ import { useDebounce } from "@/src/utils/hooks/useDebounce";
 
 import { Text } from "@/src/ui/components/Text";
 import { errorUtils } from "@/src/utils/errorUtils";
-import { useScrollToTop } from "@react-navigation/native";
+import { useScrollToTop } from "expo-router";
 import { useRef, useState } from "react";
 import { ListRenderItemInfo } from "react-native";
 import Animated, { FadingTransition } from "react-native-reanimated";
