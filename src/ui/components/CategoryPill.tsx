@@ -10,6 +10,7 @@ export function CategoryPill({ category, ...pillProps }: CategoryPillProps) {
     <Pill
       iconName={categoryIconMap[category.code]}
       label={category.name}
+      testID={`category-pill-${category.id}`}
       {...pillProps}
     />
   );

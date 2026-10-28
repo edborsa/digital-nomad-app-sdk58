@@ -39,7 +39,11 @@ export function CityDetailsHeader({
           padding="padding"
           style={{ paddingTop: top }}
         >
-          <IconButton iconName="Chevron-left" onPress={router.back} />
+          <IconButton
+            testID="back-button"
+            iconName="Chevron-left"
+            onPress={router.back}
+          />
           <CityFavoriteButton size={30} city={{ id, isFavorite }} />
         </Box>
       </ImageBackground>

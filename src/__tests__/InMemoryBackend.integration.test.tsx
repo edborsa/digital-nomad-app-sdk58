@@ -45,4 +45,18 @@ describe("integration: in-memory backend", () => {
     ).toBeOnTheScreen();
     expect(await screen.findByText("Maestro Name")).toBeOnTheScreen();
   });
+
+  test("a city favorited on the home screen shows on the profile", async () => {
+    renderApp();
+
+    await signIn(seededUser.email, seededUser.password);
+    fireEvent.press(
+      await screen.findByTestId("favorite-button-rio-de-janeiro"),
+    );
+    fireEvent.press(screen.getByText("Perfil"));
+
+    expect(
+      await screen.findByTestId("favorite-city-card-rio-de-janeiro"),
+    ).toBeOnTheScreen();
+  });
 });

@@ -11,7 +11,7 @@ export function CityDetailsInfo({
 }: CityDetailsInfoProps) {
   return (
     <Box padding="padding">
-      <Text variant="title28" mb="s2">
+      <Text testID="city-details-name" variant="title28" mb="s2">
         {name}
       </Text>
       <Text variant="text18" mb="s24">

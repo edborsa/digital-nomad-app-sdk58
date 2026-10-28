@@ -7,12 +7,14 @@ export type TextLinkProps = {
   ctaText: string;
   href?: LinkProps["href"];
   goBackOnPress?: boolean;
+  testID?: string;
 };
 export function TextLink({
   text,
   ctaText,
   href,
   goBackOnPress,
+  testID,
 }: TextLinkProps) {
   function handleOnPress() {
     if (href) {
@@ -23,7 +25,7 @@ export function TextLink({
   }
 
   return (
-    <Pressable onPress={handleOnPress}>
+    <Pressable testID={testID} onPress={handleOnPress}>
       <Text alignSelf="center" mt="s16" color="gray2">
         {text}{" "}
         <Text variant="title14" color="primary">

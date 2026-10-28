@@ -21,7 +21,11 @@ export function ProfileHeader({ authUser }: ProfileHeaderProps) {
       </Text>
 
       <Box rowGap="s4">
-        <LineItem label="Nome" value={authUser.fullname} />
+        <LineItem
+          testID="profile-fullname"
+          label="Nome"
+          value={authUser.fullname}
+        />
         <LineItem label="E-mail" value={authUser.email} />
         <LineItem
           label="Membro desde"
@@ -32,6 +36,7 @@ export function ProfileHeader({ authUser }: ProfileHeaderProps) {
       <Box flexDirection="row" columnGap="s16" mt="s16">
         <Box flex={1}>
           <Button
+            testID="edit-profile-button"
             title="Editar perfil"
             variant="secondary"
             onPress={() =>
@@ -57,13 +62,21 @@ export function ProfileHeader({ authUser }: ProfileHeaderProps) {
   );
 }
 
-function LineItem({ label, value }: { label: string; value: string }) {
+function LineItem({
+  label,
+  value,
+  testID,
+}: {
+  label: string;
+  value: string;
+  testID?: string;
+}) {
   return (
     <Box flexDirection="row" justifyContent="space-between">
       <Text variant="text14" color="gray2">
         {label}
       </Text>
-      <Text variant="text14" color="text">
+      <Text testID={testID} variant="text14" color="text">
         {value}
       </Text>
     </Box>

@@ -1,0 +1,19 @@
+appId: com.coffstack.digitalnomadapp
+---
+- launchApp:
+    clearState: true
+- runFlow: subflows/sign-in.yml
+
+# Tokyo is not a beach city, so the beach filter hides it
+- assertVisible:
+    id: city-card-tokyo
+- tapOn:
+    id: category-pill-beach
+- assertNotVisible:
+    id: city-card-tokyo
+
+- tapOn:
+    id: city-card-rio-de-janeiro
+- assertVisible:
+    id: city-details-name
+    text: Rio de Janeiro

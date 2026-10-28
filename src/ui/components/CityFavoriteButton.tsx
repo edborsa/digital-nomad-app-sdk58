@@ -14,6 +14,7 @@ export function CityFavoriteButton({
 
   return (
     <TouchableOpacityBox
+      testID={`favorite-button-${city.id}`}
       onPress={() => {
         toggleFavorite({ cityId: city.id, isFavorite: false });
       }}

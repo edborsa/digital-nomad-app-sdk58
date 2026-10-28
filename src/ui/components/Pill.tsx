@@ -8,6 +8,7 @@ export type PillProps = {
   iconName: IconName;
   active: boolean;
   onPress?: PressableProps["onPress"];
+  testID?: string;
 };
 
 /**
@@ -16,9 +17,9 @@ export type PillProps = {
  */
 export const PILL_HEIGHT = 16 + 16 + 4;
 
-export function Pill({ label, iconName, active, onPress }: PillProps) {
+export function Pill({ label, iconName, active, onPress, testID }: PillProps) {
   return (
-    <Pressable onPress={onPress}>
+    <Pressable testID={testID} onPress={onPress}>
       <Box {...boxStyle} backgroundColor={active ? "gray1" : "transparent"}>
         <Icon name={iconName} size={16} color={active ? "primary" : "gray2"} />
         <Text ml="s4" variant="text12">

@@ -32,7 +32,7 @@ export function CityCard({
 
   return (
     <Link push href={`/city-details/${cityPreview.id}`} asChild>
-      <Pressable>
+      <Pressable testID={`city-card-${cityPreview.id}`}>
         <ImageBackground
           source={
             typeof cityPreview.coverImage === "number"

@@ -28,6 +28,7 @@ export default function TabLayout() {
         name="index"
         options={{
           title: "Início",
+          tabBarButtonTestID: "tab-home",
           tabBarIcon: ({ focused }) => {
             return (
               <Icon
@@ -42,6 +43,7 @@ export default function TabLayout() {
         name="explore"
         options={{
           title: "Explorar",
+          tabBarButtonTestID: "tab-explore",
           tabBarIcon: ({ focused }) => {
             return (
               <Icon name={"Explore"} color={focused ? "primary" : "gray2"} />
@@ -53,6 +55,7 @@ export default function TabLayout() {
         name="profile"
         options={{
           title: "Perfil",
+          tabBarButtonTestID: "tab-profile",
           tabBarIcon: ({ focused }) => {
             return (
               <Icon

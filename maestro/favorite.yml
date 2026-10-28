@@ -1,0 +1,19 @@
+appId: com.coffstack.digitalnomadapp
+---
+- launchApp:
+    clearState: true
+- runFlow: subflows/sign-in.yml
+
+# Favorite from the city details: on iOS the button inside a city card
+# is hidden from Maestro by the card's own accessibility element
+- tapOn:
+    id: city-card-rio-de-janeiro
+- tapOn:
+    id: favorite-button-rio-de-janeiro
+- tapOn:
+    id: back-button
+
+- tapOn:
+    id: tab-profile
+- assertVisible:
+    id: favorite-city-card-rio-de-janeiro

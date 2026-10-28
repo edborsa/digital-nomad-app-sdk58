@@ -21,7 +21,7 @@ export function FavoriteCityCard({ cityPreview }: FavoriteCityCardProps) {
 
   return (
     <Link push href={`/city-details/${cityPreview.id}`} asChild>
-      <Pressable>
+      <Pressable testID={`favorite-city-card-${cityPreview.id}`}>
         <Box
           flexDirection="row"
           backgroundColor="gray1"

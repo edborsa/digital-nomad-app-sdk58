@@ -2,24 +2,22 @@ appId: com.coffstack.digitalnomadapp
 ---
 - launchApp:
     clearState: true
-
-- runFlow: sign-in.yml
+- runFlow: subflows/sign-in.yml
 
 - tapOn:
-    text: .*Perfil.*
+    id: tab-profile
 - tapOn:
-    text: .*Editar perfil.*
+    id: edit-profile-button
 
 - tapOn:
     id: fullname-input
-
 - eraseText: 100
-- inputText: "Maestro Name"
-
-- hideKeyboard
-
+- inputText: Maestro Name
+- pressKey: Enter
 - tapOn:
     id: submit-button
 
-- assertVisible: ".*perfil atualizado.*"
-- assertVisible: ".*Maestro Name*"
+# Saving goes back to the profile, which shows the new name
+- assertVisible:
+    id: profile-fullname
+    text: Maestro Name

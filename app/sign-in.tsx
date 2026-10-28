@@ -51,6 +51,7 @@ export default function SignInScreen() {
         <Button testID="sign-in-button" title="Entrar" onPress={handleSignIn} />
 
         <TextLink
+          testID="sign-up-link"
           href="/sign-up"
           text="Ainda não tem uma conta?"
           ctaText="Criar"

@@ -1,0 +1,30 @@
+appId: com.coffstack.digitalnomadapp
+---
+- launchApp:
+    clearState: true
+
+- tapOn:
+    id: sign-up-link
+- tapOn:
+    id: fullname-input
+- inputText: Maestro Sign Up
+- tapOn:
+    id: email-input
+- inputText: maestro.signup@coffstack.com
+- tapOn:
+    id: password-input
+- inputText: a123456b
+- tapOn:
+    id: confirm-password-input
+- inputText: a123456b
+- pressKey: Enter
+- tapOn:
+    id: submit-button
+# iOS offers to save the password; system UI has no testID
+- tapOn:
+    text: Not Now
+    optional: true
+
+# Signing up goes back to the sign-in screen
+- assertVisible:
+    id: sign-in-button

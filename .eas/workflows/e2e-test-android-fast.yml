@@ -1,15 +1,48 @@
 name: e2e-test-android-fast
 
-# on:
-#   schedule:
-#     - cron: "0 0 * * *" # Runs at midnight GMT every day
+# Every push to main. Reuses an Android build whose native fingerprint
+# matches and repacks it with the new JavaScript; builds only when none does.
 on:
   push:
-    branches: ["main-end-to-end"]
+    branches: ["main"]
 
 jobs:
+  fingerprint:
+    type: fingerprint
+    environment: preview
+
+  get_android_build:
+    needs: [fingerprint]
+    type: get-build
+    params:
+      fingerprint_hash: ${{ needs.fingerprint.outputs.android_fingerprint_hash }}
+      platform: android
+      profile: maestro
+
+  repack_android:
+    needs: [get_android_build]
+    if: ${{ needs.get_android_build.outputs.build_id }}
+    type: repack
+    params:
+      build_id: ${{ needs.get_android_build.outputs.build_id }}
+
+  build_android:
+    needs: [get_android_build]
+    if: ${{ !needs.get_android_build.outputs.build_id }}
+    type: build
+    params:
+      platform: android
+      profile: maestro
+
   maestro_test:
+    after: [repack_android, build_android]
     type: maestro
     params:
-      build_id: "b92b7675-d87a-4adc-92cf-74822d3cb74f"
-      flow_path: ["maestro/auth.yml", "maestro/edit-profile.yml"]
+      build_id: ${{ needs.repack_android.outputs.build_id || needs.build_android.outputs.build_id }}
+      flow_path:
+        - maestro/sign-in.yml
+        - maestro/auth.yml
+        - maestro/edit-profile.yml
+        - maestro/sign-up.yml
+        - maestro/browse.yml
+        - maestro/favorite.yml

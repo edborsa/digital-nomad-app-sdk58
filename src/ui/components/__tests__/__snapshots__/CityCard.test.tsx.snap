@@ -33,6 +33,7 @@ exports[`<CityCard /> should render the component 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   role="link"
+  testID="city-card-1"
 >
   <View
     accessibilityIgnoresInvertColors={true}
@@ -137,6 +138,7 @@ exports[`<CityCard /> should render the component 1`] = `
               "opacity": 1,
             }
           }
+          testID="favorite-button-1"
         >
           <View
             testID="Favorite-outline"

@@ -16,8 +16,9 @@ export class InMemoryCityRepo implements ICityRepo {
   }
   async toggleFavorite(params: CityToggleFavoriteParams): Promise<void> {
     const city = cities.find((city) => city.id === params.cityId);
+    // params.isFavorite is the state before the toggle
     if (city) {
-      city.isFavorite = params.isFavorite;
+      city.isFavorite = !params.isFavorite;
     }
   }
   async findAllFavorites(): Promise<CityPreview[]> {

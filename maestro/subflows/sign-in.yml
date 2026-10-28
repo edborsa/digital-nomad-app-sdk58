@@ -1,0 +1,19 @@
+# Signs in the seeded in-memory user; expects the sign-in screen to be showing
+appId: com.coffstack.digitalnomadapp
+---
+- tapOn:
+    id: email-input
+- inputText: contato@coffstack.com
+- tapOn:
+    id: password-input
+- inputText: a123456b
+# Return closes the keyboard; hideKeyboard is unreliable on iOS
+- pressKey: Enter
+- tapOn:
+    id: sign-in-button
+# iOS offers to save the password; system UI has no testID
+- tapOn:
+    text: Not Now
+    optional: true
+- assertVisible:
+    id: tab-home
