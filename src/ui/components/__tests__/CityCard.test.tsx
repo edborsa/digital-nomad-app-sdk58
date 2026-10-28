@@ -14,7 +14,7 @@ describe("<CityCard />", () => {
           name: "Bangkok",
           isFavorite: false,
         }}
-      />
+      />,
     );
 
     expect(screen.toJSON()).toMatchSnapshot();
@@ -29,7 +29,7 @@ describe("<CityCard />", () => {
           name: "Rio de Janeiro",
           isFavorite: false,
         }}
-      />
+      />,
     );
 
     expect(screen.getByText("Brasil")).toBeOnTheScreen();

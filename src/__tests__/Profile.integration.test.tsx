@@ -33,14 +33,14 @@ describe("integration: Profile", () => {
 
     fireEvent.changeText(
       screen.getByTestId("fullname-input"),
-      "Lucas Coffstack"
+      "Lucas Coffstack",
     );
 
     fireEvent.press(screen.getByTestId("submit-button"));
 
     // verify toast message
     expect(
-      await screen.findByText("perfil atualizado com sucesso")
+      await screen.findByText("perfil atualizado com sucesso"),
     ).toBeOnTheScreen();
 
     expect(await screen.findByText(/Informações da Conta/i)).toBeOnTheScreen();

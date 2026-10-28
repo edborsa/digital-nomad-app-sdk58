@@ -15,7 +15,7 @@ describe("<Button />", () => {
   it("should NOT call the onPress function when it is disabled", () => {
     const onPressFn = jest.fn();
     renderComponent(
-      <Button title="button title" onPress={onPressFn} disabled={true} />
+      <Button title="button title" onPress={onPressFn} disabled={true} />,
     );
 
     fireEvent.press(screen.getByText("button title"));

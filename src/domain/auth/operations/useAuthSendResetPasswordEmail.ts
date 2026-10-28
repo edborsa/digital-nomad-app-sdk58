@@ -6,7 +6,7 @@ import {
 import { useRepository } from "@/src/infra/repositories/RepositoryProvider";
 
 export function useAuthSendResetPasswordEmail(
-  options?: UseAppMutationOptions<void>
+  options?: UseAppMutationOptions<void>,
 ) {
   const { auth } = useRepository();
   const feedbackService = useFeedbackService();

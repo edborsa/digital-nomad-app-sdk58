@@ -23,8 +23,8 @@ export function TextInput({
   const borderColor = errorMessage
     ? "fbErrorSurface"
     : isFocused
-    ? "text"
-    : "gray1";
+      ? "text"
+      : "gray1";
 
   return (
     <Box>

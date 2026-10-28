@@ -12,13 +12,13 @@ describe("<SignUpForm />", () => {
 
     fireEvent.changeText(
       screen.getByTestId("email-input"),
-      "lucas@coffstack.com"
+      "lucas@coffstack.com",
     );
 
     fireEvent.changeText(screen.getByTestId("password-input"), "12345678");
     fireEvent.changeText(
       screen.getByTestId("confirm-password-input"),
-      "12345678"
+      "12345678",
     );
 
     fireEvent.press(screen.getByTestId("submit-button"));
@@ -30,7 +30,7 @@ describe("<SignUpForm />", () => {
           email: "lucas@coffstack.com",
           password: "12345678",
         }),
-        undefined // React Hook Form onInvalid callback
+        undefined, // React Hook Form onInvalid callback
       );
     });
   });
@@ -42,18 +42,18 @@ describe("<SignUpForm />", () => {
 
       fireEvent.changeText(
         screen.getByTestId("fullname-input"),
-        "Lucas Garcez"
+        "Lucas Garcez",
       );
 
       fireEvent.changeText(
         screen.getByTestId("email-input"),
-        "lucas@coffstack.com"
+        "lucas@coffstack.com",
       );
 
       fireEvent.changeText(screen.getByTestId("password-input"), "12345678");
       fireEvent.changeText(
         screen.getByTestId("confirm-password-input"),
-        "another-password"
+        "another-password",
       );
 
       fireEvent.press(screen.getByTestId("submit-button"));
@@ -62,7 +62,7 @@ describe("<SignUpForm />", () => {
 
       //style test
       expect(
-        screen.getByTestId("confirm-password-input-container")
+        screen.getByTestId("confirm-password-input-container"),
       ).toHaveStyle({ borderColor: theme.colors.fbErrorSurface });
 
       expect(onSubmitMock).not.toHaveBeenCalled();
@@ -74,7 +74,7 @@ describe("<SignUpForm />", () => {
 
       fireEvent.changeText(
         screen.getByTestId("fullname-input"),
-        "Lucas Garcez"
+        "Lucas Garcez",
       );
 
       fireEvent.changeText(screen.getByTestId("email-input"), "invalid-email");
@@ -82,7 +82,7 @@ describe("<SignUpForm />", () => {
       fireEvent.changeText(screen.getByTestId("password-input"), "12345678");
       fireEvent.changeText(
         screen.getByTestId("confirm-password-input"),
-        "12345678"
+        "12345678",
       );
 
       fireEvent.press(screen.getByTestId("submit-button"));

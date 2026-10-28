@@ -2,7 +2,7 @@ import { Repositories } from "@/src/domain/Repositories";
 import React from "react";
 
 export const RepositoryContext = React.createContext<Repositories>(
-  {} as Repositories
+  {} as Repositories,
 );
 
 export const RepositoryProvider = RepositoryContext.Provider;
@@ -12,7 +12,7 @@ export function useRepository(): Repositories {
 
   if (!context) {
     throw new Error(
-      "Repository Context should be used within a RepositoryProvider"
+      "Repository Context should be used within a RepositoryProvider",
     );
   }
 

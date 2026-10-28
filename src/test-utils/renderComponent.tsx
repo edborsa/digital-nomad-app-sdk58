@@ -17,5 +17,5 @@ export const AllTheProviders = ({ children }: React.PropsWithChildren) => {
 
 export const renderComponent = (
   component: ReactElement,
-  options?: Omit<RenderOptions, "wrapper">
+  options?: Omit<RenderOptions, "wrapper">,
 ) => render(component, { wrapper: AllTheProviders, ...options });

@@ -39,7 +39,7 @@ describe("integration: Home", () => {
     });
 
     expect(
-      await screen.findByText(/erro ao carregar cidades/i)
+      await screen.findByText(/erro ao carregar cidades/i),
     ).toBeOnTheScreen();
     expect(await screen.findByText(/server is down!/i)).toBeOnTheScreen();
   });
@@ -58,7 +58,7 @@ describe("integration: Home", () => {
 
     expect(await screen.findByText(/carregando cidades/i)).toBeOnTheScreen();
     expect(
-      await screen.findByText(/não há cidades no momento/i)
+      await screen.findByText(/não há cidades no momento/i),
     ).toBeOnTheScreen();
   });
 });

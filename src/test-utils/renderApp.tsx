@@ -61,7 +61,7 @@ export function renderApp(options?: {
 }) {
   const finalRepository: Repositories = merge(
     clonedeep(InMemoryRepository),
-    options?.repositories ?? {}
+    options?.repositories ?? {},
   );
 
   const client = new QueryClient(queryClientOptions);
@@ -103,6 +103,6 @@ export function renderApp(options?: {
       "sign-in": () => <SignInScreen />,
       "sign-up": () => <SignUpScreen />,
     },
-    { wrapper: Wrapper, initialUrl: "/" }
+    { wrapper: Wrapper, initialUrl: "/" },
   );
 }

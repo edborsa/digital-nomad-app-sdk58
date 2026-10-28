@@ -34,5 +34,5 @@ export const TouchableOpacityBox = createRestyleComponent<
   Theme
 >(
   [backgroundColor, spacing, spacingShorthand, layout, border],
-  RNTouchableOpacity
+  RNTouchableOpacity,
 );

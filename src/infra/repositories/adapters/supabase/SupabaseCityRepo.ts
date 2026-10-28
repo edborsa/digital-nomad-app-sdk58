@@ -111,7 +111,7 @@ async function findAllFavorites(): Promise<CityPreview[]> {
       country,
       cover_image
       )
-    `
+    `,
     )
     .eq("user_id", user.id)
     .throwOnError();
@@ -136,7 +136,7 @@ async function findGroupedByCategory(): Promise<CitiesGroupedByCategory[]> {
           cover_image
         )  
       )
-    `
+    `,
     )
     .throwOnError();
 
@@ -148,7 +148,7 @@ async function findGroupedByCategory(): Promise<CitiesGroupedByCategory[]> {
       name: item.name,
     }),
     cities: item.city_categories.map((data) =>
-      supabaseAdapter.toCityPreview(data.cities)
+      supabaseAdapter.toCityPreview(data.cities),
     ),
   }));
 }

@@ -24,7 +24,7 @@ export function BottomSheet({
   const height = useSharedValue(0);
 
   const progress = useDerivedValue(() =>
-    withTiming(isOpen.value ? 0 : 1, { duration })
+    withTiming(isOpen.value ? 0 : 1, { duration }),
   );
 
   const sheetAnimatedStyle = useAnimatedStyle(() => ({

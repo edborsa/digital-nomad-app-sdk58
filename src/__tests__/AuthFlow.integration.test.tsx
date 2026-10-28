@@ -11,12 +11,12 @@ describe("integration: Auth Flow", () => {
     // type email and password
     fireEvent.changeText(
       screen.getByPlaceholderText("seu email"),
-      "lucas@coffstack.com"
+      "lucas@coffstack.com",
     );
 
     fireEvent.changeText(
       screen.getByPlaceholderText("digite sua senha"),
-      "12345678"
+      "12345678",
     );
 
     // press the sign-in button
@@ -24,7 +24,7 @@ describe("integration: Auth Flow", () => {
 
     // verify toast message
     expect(
-      await screen.findByText("signed in: lucas@coffstack.com")
+      await screen.findByText("signed in: lucas@coffstack.com"),
     ).toBeOnTheScreen();
 
     // verify if home screen was rendered

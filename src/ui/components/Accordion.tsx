@@ -53,7 +53,7 @@ function AccordionHeader({
     tintColor: interpolateColor(
       progress.value,
       [0, 1],
-      [colors.gray2, colors.primary]
+      [colors.gray2, colors.primary],
     ),
     transform: [
       {
@@ -66,17 +66,17 @@ function AccordionHeader({
     backgroundColor: interpolateColor(
       progress.value,
       [0, 1],
-      [colors.transparent, colors.gray1]
+      [colors.transparent, colors.gray1],
     ),
     borderBottomLeftRadius: interpolate(
       progress.value,
       [0, 1],
-      [borderRadii.default, 0]
+      [borderRadii.default, 0],
     ),
     borderBottomRightRadius: interpolate(
       progress.value,
       [0, 1],
-      [borderRadii.default, 0]
+      [borderRadii.default, 0],
     ),
   }));
 
@@ -113,12 +113,12 @@ function AccordionBody({
       borderTopLeftRadius: interpolate(
         progress.value,
         [0, 1],
-        [borderRadii.default, 0]
+        [borderRadii.default, 0],
       ),
       borderTopRightRadius: interpolate(
         progress.value,
         [0, 1],
-        [borderRadii.default, 0]
+        [borderRadii.default, 0],
       ),
     };
   });

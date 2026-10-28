@@ -24,7 +24,7 @@ export default function HomeScreen() {
 
   const debouncedCityName = useDebounce(cityName);
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(
-    null
+    null,
   );
 
   const {

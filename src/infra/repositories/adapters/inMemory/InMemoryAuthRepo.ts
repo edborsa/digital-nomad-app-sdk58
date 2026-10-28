@@ -14,7 +14,7 @@ export class InMemoryAuthRepo implements IAuthRepo {
 
   async signUp(params: AuthSignUpParams): Promise<void> {
     const userAlreadyExist = authUsers.find(
-      (user) => user.email === params.email
+      (user) => user.email === params.email,
     );
     if (userAlreadyExist) {
       throw new Error("user already exist");
