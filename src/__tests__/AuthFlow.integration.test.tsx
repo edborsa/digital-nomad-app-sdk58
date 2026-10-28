@@ -1,26 +1,12 @@
 import { fireEvent, screen } from "@testing-library/react-native";
 import { renderApp } from "../test-utils/renderApp";
+import { signIn } from "../test-utils/signIn";
 
 describe("integration: Auth Flow", () => {
   test("the user can sign-in and sign-out", async () => {
     renderApp();
 
-    // waiting for screen to be rendered
-    expect(await screen.findByText("Bem-vindo"));
-
-    // type email and password
-    fireEvent.changeText(
-      screen.getByPlaceholderText("seu email"),
-      "lucas@coffstack.com",
-    );
-
-    fireEvent.changeText(
-      screen.getByPlaceholderText("digite sua senha"),
-      "12345678",
-    );
-
-    // press the sign-in button
-    fireEvent.press(screen.getByText(/entrar/i));
+    await signIn("lucas@coffstack.com", "12345678");
 
     // verify toast message
     expect(

@@ -1,28 +1,15 @@
 import { fireEvent, screen } from "@testing-library/react-native";
 import { renderApp } from "../test-utils/renderApp";
+import { signIn } from "../test-utils/signIn";
 
 // The seeded user the Maestro flows sign in with
 const seededUser = { email: "contato@coffstack.com", password: "a123456b" };
-
-async function signInAsSeededUser() {
-  expect(await screen.findByText("Bem-vindo"));
-
-  fireEvent.changeText(
-    screen.getByPlaceholderText("seu email"),
-    seededUser.email,
-  );
-  fireEvent.changeText(
-    screen.getByPlaceholderText("digite sua senha"),
-    seededUser.password,
-  );
-  fireEvent.press(screen.getByText(/entrar/i));
-}
 
 describe("integration: in-memory backend", () => {
   test("the seeded user can sign in", async () => {
     renderApp();
 
-    await signInAsSeededUser();
+    await signIn(seededUser.email, seededUser.password);
 
     expect(
       await screen.findByText(`signed in: ${seededUser.email}`),
@@ -33,7 +20,7 @@ describe("integration: in-memory backend", () => {
   test("the profile shows the user who signed in", async () => {
     renderApp();
 
-    await signInAsSeededUser();
+    await signIn(seededUser.email, seededUser.password);
     fireEvent.press(await screen.findByText("Perfil"));
 
     expect(await screen.findByText("Contato Coffstack")).toBeOnTheScreen();
@@ -43,7 +30,7 @@ describe("integration: in-memory backend", () => {
   test("an edited name shows on the profile", async () => {
     renderApp();
 
-    await signInAsSeededUser();
+    await signIn(seededUser.email, seededUser.password);
     fireEvent.press(await screen.findByText("Perfil"));
     fireEvent.press(await screen.findByText(/editar perfil/i));
 
