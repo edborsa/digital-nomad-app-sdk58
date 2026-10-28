@@ -9,3 +9,5 @@ The two apps share no code for now. Each one generates its own types from the sh
 `react-dom` came back as a dependency at Expo SDK 54, pinned to React's version. expo-router 6 bundles Radix tabs (`@radix-ui/react-tabs`), which requires it as a peer; left unpinned, npm picks the newest `react-dom`, which needs a newer React than the SDK uses. It is a transitive requirement only: there is still no web target, web config or `react-native-web` dependency.
 
 At SDK 55 this still holds: expo-router 55 still bundles Radix tabs, and `react-dom` moves with React to 19.2.0.
+
+At SDK 56 it still holds: expo-router 56 still bundles Radix tabs, and `react-dom` moves with React to 19.2.3.

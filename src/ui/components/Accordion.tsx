@@ -22,8 +22,8 @@ export function Accordion({ title, description }: AccordionProps) {
   const progress = useSharedValue(0); // 0 => 1
 
   function handleOpenPress() {
-    isOpen.value = !isOpen.value;
-    progress.value = withTiming(isOpen.value ? 0 : 1, { duration: 600 });
+    isOpen.set(!isOpen.get());
+    progress.set(withTiming(isOpen.get() ? 0 : 1, { duration: 600 }));
   }
 
   return (

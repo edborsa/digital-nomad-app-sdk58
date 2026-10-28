@@ -56,7 +56,7 @@ export function BottomSheet({
       <Animated.View
         style={[styles.sheet, sheetAnimatedStyle]}
         onLayout={(e) => {
-          height.value = e.nativeEvent.layout.height;
+          height.set(e.nativeEvent.layout.height);
         }}
       >
         {children}

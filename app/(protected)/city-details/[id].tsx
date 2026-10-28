@@ -20,7 +20,7 @@ export default function CityDetails() {
 
   const bottomSheetIsOpen = useSharedValue(false);
   function toggleBottomSheet() {
-    bottomSheetIsOpen.value = !bottomSheetIsOpen.value;
+    bottomSheetIsOpen.set(!bottomSheetIsOpen.get());
   }
 
   if (isLoading) {
