@@ -4,6 +4,7 @@ import ExploreScreen from "@/app/(protected)/(tabs)/explore";
 import ProfileScreen from "@/app/(protected)/(tabs)/profile";
 import ProtectedLayout from "@/app/(protected)/_layout";
 import CityDetails from "@/app/(protected)/city-details/[id]";
+import NotFoundScreen from "@/app/+not-found";
 import SignInScreen from "@/app/sign-in";
 import SignUpScreen from "@/app/sign-up";
 import { renderRouter } from "expo-router/testing-library";
@@ -105,6 +106,7 @@ export function renderApp(options?: {
       "(protected)/update-password": () => <UpdatePasswordScreen />,
       "sign-in": () => <SignInScreen />,
       "sign-up": () => <SignUpScreen />,
+      "+not-found": () => <NotFoundScreen />,
     },
     { wrapper: Wrapper, initialUrl: "/" },
   );

@@ -7,7 +7,6 @@ module.exports = {
   icon: "./assets/images/icon.png",
   scheme: "digitalnomadapp",
   userInterfaceStyle: "automatic",
-  newArchEnabled: true,
   ios: {
     supportsTablet: true,
     bundleIdentifier: "com.eduardoborsa.digitalnomadapp",
@@ -20,7 +19,6 @@ module.exports = {
       foregroundImage: "./assets/images/adaptive-icon.png",
       backgroundColor: "#1B1B1B",
     },
-    edgeToEdgeEnabled: true,
     package: "com.eduardoborsa.digitalnomadapp",
     config: {
       googleMaps: {
