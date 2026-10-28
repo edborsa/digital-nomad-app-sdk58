@@ -11,8 +11,17 @@ jobs:
       - uses: eas/checkout
       - uses: eas/install_node_modules
 
+      - name: Check Expo config and dependencies
+        run: npx expo-doctor
+
       - name: Run TypeScript Compiler
         run: npx tsc --noEmit
+
+      - name: Run ESLint
+        run: npx eslint .
+
+      - name: Check formatting
+        run: npx prettier --check .
 
       - name: Run Tests
         run: npm run test:ci

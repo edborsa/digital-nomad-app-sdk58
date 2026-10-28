@@ -1,0 +1,16 @@
+# Generated or managed by tools
+package-lock.json
+skills-lock.json
+expo-env.d.ts
+coverage/
+dist/
+android/
+ios/
+.expo/
+
+# Agent and tracker files (beads manages blocks in AGENTS.md by hash)
+AGENTS.md
+.agents/
+.claude/
+.beads/
+.cursor/
