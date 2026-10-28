@@ -3,6 +3,12 @@ appId: com.eduardoborsa.digitalnomadapp
 ---
 - tapOn:
     id: email-input
+# Android offers a saved login; this user types theirs (system UI has no testID)
+- runFlow:
+    when:
+      visible: Use your saved password.*
+    commands:
+      - tapOn: Cancel
 - inputText: contato@coffstack.com
 - tapOn:
     id: password-input
@@ -11,9 +17,9 @@ appId: com.eduardoborsa.digitalnomadapp
 - pressKey: Enter
 - tapOn:
     id: sign-in-button
-# iOS offers to save the password; system UI has no testID
+# iOS and Android offer to save the password; system UI has no testID
 - tapOn:
-    text: Not Now
+    text: Not [Nn]ow
     optional: true
 - assertVisible:
     id: tab-home

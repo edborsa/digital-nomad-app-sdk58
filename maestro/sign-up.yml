@@ -24,9 +24,9 @@ appId: com.eduardoborsa.digitalnomadapp
 - pressKey: Enter
 - tapOn:
     id: submit-button
-# iOS offers to save the password; system UI has no testID
+# iOS and Android offer to save the password; system UI has no testID
 - tapOn:
-    text: Not Now
+    text: Not [Nn]ow
     optional: true
 
 # Signing up goes back to the sign-in screen
