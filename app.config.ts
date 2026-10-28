@@ -27,11 +27,6 @@ module.exports = {
       },
     },
   },
-  web: {
-    bundler: "metro",
-    output: "static",
-    favicon: "./assets/images/favicon.png",
-  },
   plugins: [
     "expo-router",
     [
@@ -43,7 +38,6 @@ module.exports = {
         backgroundColor: "#1B1B1B",
       },
     ],
-    "expo-web-browser",
   ],
   experiments: {
     typedRoutes: true,

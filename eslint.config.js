@@ -7,6 +7,6 @@ module.exports = defineConfig([
   expoConfig,
   prettierConfig,
   {
-    ignores: ["dist/*", ".agents/*", ".claude/*", ".beads/*"],
+    ignores: ["dist/*", ".expo/*", ".agents/*", ".claude/*", ".beads/*"],
   },
 ]);
