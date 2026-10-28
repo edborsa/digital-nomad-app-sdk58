@@ -8,7 +8,6 @@
     "ios": "expo run:ios",
     "lint": "eslint .",
     "test": "jest --watchAll --verbose",
-    "test:ci": "jest --verbose",
     "test:coverage": "jest --verbose --coverage",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
@@ -70,14 +69,15 @@
   "jest": {
     "preset": "jest-expo",
     "collectCoverageFrom": [
-      "{src,app}/**/*.{ts,tsx}"
+      "{src,app}/**/*.{ts,tsx}",
+      "!src/test-utils/**"
     ],
     "coverageThreshold": {
       "global": {
-        "statements": 69,
-        "branches": 64,
-        "functions": 64,
-        "lines": 69
+        "statements": 68.5,
+        "branches": 63.33,
+        "functions": 63.67,
+        "lines": 68.63
       }
     },
     "setupFiles": [

@@ -11,6 +11,6 @@ jobs:
       - uses: eas/checkout
       - uses: eas/install_node_modules
 
-      # Same gates as local `npm run check`: expo-doctor, tsc, ESLint, Prettier, Jest
+      # Same gates as local `npm run check`: expo-doctor, tsc, ESLint, Prettier, Jest with the coverage threshold
       - name: Run checks
         run: npm run check
