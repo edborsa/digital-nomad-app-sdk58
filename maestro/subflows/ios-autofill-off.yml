@@ -1,0 +1,23 @@
+# Turns off iOS password AutoFill. Simulators can't hand a generated strong
+# password to the app, so a sign-up flow types its own password, as a user can.
+# Settings navigation is system UI (no testIDs); written for iOS 18.
+appId: com.apple.Preferences
+---
+- launchApp:
+    appId: com.apple.Preferences
+    stopApp: true
+- tapOn: General
+- scrollUntilVisible:
+    element: AutoFill & Passwords
+- tapOn: AutoFill & Passwords
+# Only taps while the switch is on, so a second run leaves it off.
+# The id matches the whole row; the switch sits at its right end.
+- tapOn:
+    id: AutoFillToggle
+    checked: true
+    point: "90%,50%"
+    optional: true
+- assertVisible:
+    id: AutoFillToggle
+    checked: false
+- stopApp: com.apple.Preferences

@@ -1,5 +1,9 @@
 appId: com.eduardoborsa.digitalnomadapp
 ---
+- runFlow:
+    when:
+      platform: iOS
+    file: subflows/ios-autofill-off.yml
 - launchApp:
     clearState: true
 
