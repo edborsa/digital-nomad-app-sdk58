@@ -1,6 +1,6 @@
 # Issue tracker: Beads (bd)
 
-Issues and specs for this repo live in a local beads database under `.beads/` (embedded Dolt). Use the `bd` CLI for every operation; never edit files in `.beads/` by hand. For the full command reference run `bd prime` or read `.agents/skills/beads/SKILL.md`.
+Issues and specs for this repo live in a local beads database under `.beads/` (embedded Dolt). Use the `bd` CLI for every operation; never edit files in `.beads/` by hand. One exception: `.beads/hooks/pre-commit` also runs `lint-staged`, on a line after the `END BEADS INTEGRATION` marker (beads preserves content outside its markers). For the full command reference run `bd prime` or read `.agents/skills/beads/SKILL.md`.
 
 ## Conventions
 

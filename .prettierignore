@@ -8,8 +8,9 @@ android/
 ios/
 .expo/
 
-# Agent and tracker files (beads manages blocks in AGENTS.md by hash)
+# Agent and tracker files (beads manages blocks in these files by hash)
 AGENTS.md
+CLAUDE.md
 .agents/
 .claude/
 .beads/

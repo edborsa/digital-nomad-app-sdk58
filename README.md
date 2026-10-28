@@ -14,7 +14,15 @@ Aplicativo completo inspirado nos principais destinos de viagem escolhidos por n
    npm install
    ```
 
-2. Inicie o aplicativo
+2. Ative os git hooks (formata e corrige o lint dos arquivos staged a cada commit)
+
+   ```bash
+   bd hooks install --beads
+   ```
+
+   Antes de abrir um PR, rode as mesmas verificações do CI com `npm run check`.
+
+3. Inicie o aplicativo
 
    ```bash
    npx expo start
