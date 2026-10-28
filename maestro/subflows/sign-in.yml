@@ -1,5 +1,5 @@
 # Signs in the seeded in-memory user; expects the sign-in screen to be showing
-appId: com.coffstack.digitalnomadapp
+appId: com.eduardoborsa.digitalnomadapp
 ---
 - tapOn:
     id: email-input

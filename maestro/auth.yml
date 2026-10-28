@@ -1,4 +1,4 @@
-appId: com.coffstack.digitalnomadapp
+appId: com.eduardoborsa.digitalnomadapp
 ---
 - launchApp:
     clearState: true

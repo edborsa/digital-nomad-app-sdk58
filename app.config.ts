@@ -1,6 +1,7 @@
 module.exports = {
   name: "Nomad",
   slug: "digital-nomad-app",
+  owner: "dadinho94",
   version: "1.0.0",
   orientation: "portrait",
   icon: "./assets/images/icon.png",
@@ -9,7 +10,7 @@ module.exports = {
   newArchEnabled: true,
   ios: {
     supportsTablet: true,
-    bundleIdentifier: "com.coffstack.digitalnomadapp",
+    bundleIdentifier: "com.eduardoborsa.digitalnomadapp",
     infoPlist: {
       ITSAppUsesNonExemptEncryption: false,
     },
@@ -20,7 +21,7 @@ module.exports = {
       backgroundColor: "#1B1B1B",
     },
     edgeToEdgeEnabled: true,
-    package: "com.coffstack.digitalnomadapp",
+    package: "com.eduardoborsa.digitalnomadapp",
     config: {
       googleMaps: {
         apiKey: process.env.GOOGLE_MAPS_API_KEY,
@@ -45,11 +46,11 @@ module.exports = {
   extra: {
     router: {},
     eas: {
-      projectId: "03f30d93-abb0-463f-901f-09d172493029",
+      projectId: "808f0ed1-87f9-4d9f-a22f-728cdda45d23",
     },
   },
   updates: {
-    url: "https://u.expo.dev/03f30d93-abb0-463f-901f-09d172493029",
+    url: "https://u.expo.dev/808f0ed1-87f9-4d9f-a22f-728cdda45d23",
   },
   runtimeVersion: {
     policy: "appVersion",
