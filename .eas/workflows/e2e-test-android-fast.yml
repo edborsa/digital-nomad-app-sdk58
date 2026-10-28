@@ -39,10 +39,5 @@ jobs:
     type: maestro
     params:
       build_id: ${{ needs.repack_android.outputs.build_id || needs.build_android.outputs.build_id }}
-      flow_path:
-        - maestro/sign-in.yml
-        - maestro/auth.yml
-        - maestro/edit-profile.yml
-        - maestro/sign-up.yml
-        - maestro/browse.yml
-        - maestro/favorite.yml
+      # Every top-level flow; Maestro skips the subflows/ folder
+      flow_path: maestro

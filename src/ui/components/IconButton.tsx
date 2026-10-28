@@ -6,7 +6,7 @@ import { Icon, IconName } from "./Icon";
 type IconButtonProps = {
   iconName: IconName;
   onPress: PressableProps["onPress"];
-  testID?: string;
+  testID?: PressableProps["testID"];
 };
 export function IconButton({ iconName, onPress, testID }: IconButtonProps) {
   const { boxShadows } = useAppTheme();

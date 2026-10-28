@@ -8,7 +8,7 @@ export type PillProps = {
   iconName: IconName;
   active: boolean;
   onPress?: PressableProps["onPress"];
-  testID?: string;
+  testID?: PressableProps["testID"];
 };
 
 /**
