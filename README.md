@@ -32,7 +32,7 @@ Aplicativo completo inspirado nos principais destinos de viagem escolhidos por n
 
 - **Expo Router ⇒** Navegação com rotas baseadas em arquivos, facilitando a organização e a escalabilidade do app.
 - **TanStack Query ⇒** Controle eficiente de estados assíncronos, cache e revalidação de dados com uma experiência fluida para o usuário.
-- **Supabase ⇒** Backend completo com banco de dados PostgreSQL, autenticação, e storage para imagens.
+- **Backend em memória ⇒** Repositórios em memória mantêm o app funcionando até o backend Elixir/Phoenix + Ash (GraphQL) existir (ver `docs/adr/0002`).
 - **Arquitetura para Frontend ⇒** Estrutura modular inspirada em boas práticas como Separation of Concerns, Domain-Driven Design e SOLID facilitando testes, manutenção e reuso de código.
 - **Expo EAS (CI/CD) ⇒** Pipeline automatizado de build e deploy para Android e iOS usando o Expo Application Services.
 - **Expo Updates (Over-the-Air) ⇒** Atualizações rápidas e sem necessidade de aprovação nas lojas, entregues direto para os usuários.

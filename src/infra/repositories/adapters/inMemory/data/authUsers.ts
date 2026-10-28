@@ -13,4 +13,11 @@ export const authUsers: AuthUser[] = [
     fullname: "Maria Silva",
     createdAt: "2025-03-22T10:32:55.10671Z",
   },
+  {
+    // Signed in by the Maestro flows (password: a123456b)
+    id: "3",
+    email: "contato@coffstack.com",
+    fullname: "Contato Coffstack",
+    createdAt: "2025-09-01T10:00:00.00000Z",
+  },
 ];
