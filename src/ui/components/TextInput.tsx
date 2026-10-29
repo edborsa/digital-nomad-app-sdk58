@@ -2,10 +2,10 @@ import { useState } from "react";
 import {
   TextInput as RNTextInput,
   TextInputProps as RNTextInputProps,
+  View,
 } from "react-native";
-import { useAppTheme } from "../theme/useAppTheme";
-import { Box, BoxProps } from "./Box";
-import { Text } from "./Text";
+import { cn } from "../primitives/cn";
+import { Text } from "../primitives/Text";
 
 type TextInputProps = RNTextInputProps & {
   label: string;
@@ -15,55 +15,43 @@ export function TextInput({
   label,
   errorMessage,
   testID,
+  className,
   ...textInputProps
 }: TextInputProps) {
-  const { colors, textVariants } = useAppTheme();
   const [isFocused, setIsFocused] = useState(false);
 
   const borderColor = errorMessage
-    ? "fbErrorSurface"
+    ? "border-error"
     : isFocused
-      ? "text"
-      : "gray1";
+      ? "border-foreground"
+      : "border-border";
 
   return (
-    <Box>
-      <Text mb="s4" variant="title14">
+    <View>
+      <Text variant="label" className="mb-1">
         {label}
       </Text>
-      <Box
+      <View
         testID={`${testID}-container`}
-        {...textInputBoxStyle}
-        borderColor={borderColor}
+        className={cn(
+          "h-[50px] flex-row items-center rounded-2xl border-2 px-4",
+          borderColor,
+        )}
       >
         <RNTextInput
           testID={testID}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
-          placeholderTextColor={colors.gray2}
           {...textInputProps}
-          style={{
-            ...textVariants.title16,
-            color: colors.text,
-
-            height: "100%",
-            width: "100%",
-            flexShrink: 1,
-          }}
+          className={cn(
+            "h-full w-full shrink font-poppins-semibold text-heading text-foreground placeholder:text-muted",
+            className,
+          )}
         />
-      </Box>
-      <Text marginVertical="s4" variant="text12" color="fbErrorSurface">
+      </View>
+      <Text variant="caption" className="my-1 text-error">
         {errorMessage}
       </Text>
-    </Box>
+    </View>
   );
 }
-
-const textInputBoxStyle: BoxProps = {
-  flexDirection: "row",
-  alignItems: "center",
-  paddingHorizontal: "s16",
-  borderWidth: 2,
-  borderRadius: "default",
-  height: 50,
-};

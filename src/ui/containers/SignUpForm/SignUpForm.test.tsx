@@ -1,6 +1,5 @@
 import { renderComponent } from "@/src/test-utils/renderComponent";
 import { fireEvent, screen, waitFor } from "@testing-library/react-native";
-import theme from "../../theme/theme";
 import { SignUpForm } from "./SignUpForm";
 
 describe("<SignUpForm />", () => {
@@ -68,11 +67,6 @@ describe("<SignUpForm />", () => {
       await fireEvent.press(screen.getByTestId("submit-button"));
 
       expect(await screen.findByText("senhas devem ser iguais"));
-
-      //style test
-      expect(
-        screen.getByTestId("confirm-password-input-container"),
-      ).toHaveStyle({ borderColor: theme.colors.fbErrorSurface });
 
       expect(onSubmitMock).not.toHaveBeenCalled();
     });

@@ -72,7 +72,7 @@ export default function HomeScreen() {
   }
 
   return (
-    <Screen style={{ paddingHorizontal: 0 }}>
+    <Screen className="px-0">
       <Animated.FlatList
         itemLayoutAnimation={FadingTransition.duration(500)}
         ref={flatListRef}

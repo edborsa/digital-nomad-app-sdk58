@@ -22,7 +22,7 @@ export default function ExploreScreen() {
   }
 
   return (
-    <Screen style={{ paddingHorizontal: 0 }}>
+    <Screen className="px-0">
       <FlatList
         ref={flatListRef}
         data={data}

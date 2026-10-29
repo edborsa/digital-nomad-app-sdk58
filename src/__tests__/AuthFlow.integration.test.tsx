@@ -1,4 +1,4 @@
-import { fireEvent, screen } from "@testing-library/react-native";
+import { fireEvent, screen, waitFor } from "@testing-library/react-native";
 import { renderApp } from "../test-utils/renderApp";
 import { signIn } from "../test-utils/signIn";
 
@@ -25,6 +25,39 @@ describe("integration: Auth Flow", () => {
 
     // verify if user is in the sign-in screen
     expect(await screen.findByText("Bem-vindo"));
+  });
+
+  test("the sign-in button is busy and disabled while signing in", async () => {
+    let resolveSignIn: () => void = () => {};
+    await renderApp({
+      repositories: {
+        auth: {
+          signIn: (email: string) =>
+            new Promise((resolve) => {
+              resolveSignIn = () =>
+                resolve({
+                  id: "1",
+                  email,
+                  fullname: "Lucas Garcez",
+                  createdAt: "2025-06-23T10:32:55.10671Z",
+                });
+            }),
+        },
+      },
+    });
+
+    await signIn("lucas@coffstack.com", "12345678");
+
+    await waitFor(() =>
+      expect(screen.getByTestId("sign-in-button")).toBeBusy(),
+    );
+    expect(screen.getByTestId("sign-in-button")).toBeDisabled();
+
+    resolveSignIn();
+
+    expect(
+      await screen.findByText("signed in: lucas@coffstack.com"),
+    ).toBeOnTheScreen();
   });
 
   test("a new user can sign up and returns to sign-in", async () => {

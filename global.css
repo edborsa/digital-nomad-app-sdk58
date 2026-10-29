@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* The only place raw colour values live: RGB channels per theme */
+:root {
+  --color-background: 255 255 255;
+  --color-surface: 244 244 245;
+  --color-border: 212 212 216;
+  --color-foreground: 27 27 27;
+  --color-muted: 113 113 122;
+  --color-primary: 229 57 57;
+  --color-primary-foreground: 255 255 255;
+  --color-success: 46 125 50;
+  --color-success-muted: 232 245 233;
+  --color-error: 198 40 40;
+  --color-error-muted: 253 236 234;
+  --color-warning: 178 106 0;
+  --color-warning-muted: 255 244 229;
+  --color-info: 21 101 192;
+  --color-info-muted: 227 242 253;
+}
+
+.dark:root {
+  --color-background: 27 27 27;
+  --color-surface: 48 46 45;
+  --color-border: 92 92 92;
+  --color-foreground: 255 255 255;
+  --color-muted: 163 163 163;
+  --color-primary: 255 75 75;
+  --color-primary-foreground: 255 255 255;
+  --color-success: 76 175 80;
+  --color-success-muted: 30 51 32;
+  --color-error: 211 47 47;
+  --color-error-muted: 58 27 27;
+  --color-warning: 255 193 7;
+  --color-warning-muted: 51 43 26;
+  --color-info: 66 165 245;
+  --color-info-muted: 26 43 58;
+}

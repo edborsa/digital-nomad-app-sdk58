@@ -25,7 +25,7 @@ export default function CityDetails() {
 
   if (isLoading) {
     return (
-      <Screen flex={1} justifyContent="center" alignItems="center">
+      <Screen className="items-center justify-center">
         <Text>Carregando dados...</Text>
       </Screen>
     );
@@ -33,7 +33,7 @@ export default function CityDetails() {
 
   if (error || !city) {
     return (
-      <Screen flex={1} justifyContent="center" alignItems="center">
+      <Screen className="items-center justify-center">
         <Text>Erro ao carregar cidade</Text>
       </Screen>
     );
@@ -41,7 +41,7 @@ export default function CityDetails() {
 
   return (
     <>
-      <Screen style={{ paddingHorizontal: 0 }} scrollable>
+      <Screen className="px-0" scrollable>
         <Animated.View entering={FadeIn.duration(PAGE_ANIMATION_TIME)}>
           <CityDetailsHeader
             id={city.id}

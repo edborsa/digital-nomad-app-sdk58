@@ -1,10 +1,10 @@
 import { useAuthSignIn } from "@/src/domain/auth/operations/useAuthSignIn";
-import { Button } from "@/src/ui/components/Button";
 import { Screen } from "@/src/ui/components/Screen";
-import { Text } from "@/src/ui/components/Text";
 import { TextInput } from "@/src/ui/components/TextInput";
 import { Logo } from "@/src/ui/containers/Logo";
 import { TextLink } from "@/src/ui/containers/TextLink";
+import { Button } from "@/src/ui/primitives/Button";
+import { Text } from "@/src/ui/primitives/Text";
 import { Link } from "expo-router";
 import { useState } from "react";
 
@@ -13,16 +13,16 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function SignInScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { mutate: signIng } = useAuthSignIn();
+  const { mutate: signIn, isPending } = useAuthSignIn();
 
   function handleSignIn() {
-    signIng({ email, password });
+    signIn({ email, password });
   }
   return (
     <Screen scrollable>
       <SafeAreaView>
         <Logo />
-        <Text variant="title22" alignSelf="center" mb="s16">
+        <Text variant="title" className="mb-4 self-center">
           Bem-vindo
         </Text>
         <TextInput
@@ -34,7 +34,6 @@ export default function SignInScreen() {
           placeholder="seu email"
         />
         <TextInput
-          // errorMessage="mensagem de erro"
           testID="password-input"
           label="Senha"
           autoCapitalize="none"
@@ -44,11 +43,16 @@ export default function SignInScreen() {
           placeholder="digite sua senha"
         />
         <Link href="/reset-password" asChild>
-          <Text mb="s16" alignSelf="flex-end" variant="text14" color="primary">
+          <Text variant="body-sm" className="mb-4 self-end text-primary">
             Esqueceu sua senha
           </Text>
         </Link>
-        <Button testID="sign-in-button" title="Entrar" onPress={handleSignIn} />
+        <Button
+          testID="sign-in-button"
+          title="Entrar"
+          loading={isPending}
+          onPress={handleSignIn}
+        />
 
         <TextLink
           testID="sign-up-link"

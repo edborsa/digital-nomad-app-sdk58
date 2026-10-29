@@ -1,6 +1,6 @@
 import { LinkProps, router } from "expo-router";
 import { Pressable } from "react-native";
-import { Text } from "../components/Text";
+import { Text } from "../primitives/Text";
 
 export type TextLinkProps = {
   text: string;
@@ -25,10 +25,15 @@ export function TextLink({
   }
 
   return (
-    <Pressable testID={testID} onPress={handleOnPress}>
-      <Text alignSelf="center" mt="s16" color="gray2">
+    <Pressable
+      testID={testID}
+      accessibilityRole="link"
+      className="mt-4 min-h-11 justify-center self-center"
+      onPress={handleOnPress}
+    >
+      <Text className="text-muted">
         {text}{" "}
-        <Text variant="title14" color="primary">
+        <Text variant="label" className="text-primary">
           {ctaText}
         </Text>
       </Text>
