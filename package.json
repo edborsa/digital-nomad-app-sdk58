@@ -12,7 +12,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "check": "npx expo-doctor && tsc --noEmit && npm run lint && npm run format:check && npm run test:coverage",
-    "codegen": "graphql-codegen --config codegen.ts"
+    "codegen": "graphql-codegen --config codegen.ts",
+    "postinstall": "patch-package --error-on-fail --error-on-warn"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.0.3",
@@ -69,6 +70,7 @@
     "lint-staged": "^16.4.0",
     "lodash.clonedeep": "^4.5.0",
     "lodash.merge": "^4.6.2",
+    "patch-package": "^8.0.1",
     "prettier": "^3.9.10",
     "prettier-plugin-tailwindcss": "^0.8.1",
     "reactotron-react-native": "^5.3.1",
