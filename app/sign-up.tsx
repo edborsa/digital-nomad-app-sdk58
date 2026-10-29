@@ -9,7 +9,7 @@ import { router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function SignUpScreen() {
-  const { mutate: signUp } = useAuthSignUp({ onSuccess: router.back });
+  const { mutate: signUp } = useAuthSignUp({ onSuccess: () => router.back() });
 
   function handleSignUp(formValues: SignUpSchema) {
     signUp({

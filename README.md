@@ -6,6 +6,15 @@ Aplicativo completo inspirado nos principais destinos de viagem escolhidos por n
 
 [![Quero Me Inscrever](https://img.shields.io/badge/Quero%20Me%20Inscrever-4CAF50?style=for-the-badge&logoColor=white)](https://coffstack.com.br/profissional-react-native)
 
+## Requisitos
+
+Versões mínimas para o Expo SDK 58 (React Native 0.88):
+
+- **Node.js** `^22.13 || ^24.3 || >=26`
+- **Xcode** 26.4+, com iOS 16.4+ como alvo mínimo
+- **Android** compileSdk 37 / targetSdk 36
+- **JDK** 17
+
 ## Começar
 
 1. instalar dependências

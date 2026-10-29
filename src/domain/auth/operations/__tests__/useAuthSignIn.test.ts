@@ -40,7 +40,7 @@ describe("useAuthSignIn()", () => {
     };
     mockSignIn.mockResolvedValueOnce(user);
 
-    const { result } = renderHook(() => useAuthSignIn(), {
+    const { result } = await renderHook(() => useAuthSignIn(), {
       wrapper: AllTheProviders,
     });
 
@@ -65,7 +65,7 @@ describe("useAuthSignIn()", () => {
     const error = new Error("invalid credentials");
     mockSignIn.mockRejectedValueOnce(error);
 
-    const { result } = renderHook(() => useAuthSignIn(), {
+    const { result } = await renderHook(() => useAuthSignIn(), {
       wrapper: AllTheProviders,
     });
 

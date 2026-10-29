@@ -3,8 +3,8 @@ import { screen } from "@testing-library/react-native";
 import { Text } from "../Text";
 
 describe("<Text />", () => {
-  test("render component", () => {
-    renderComponent(<Text>Hello world</Text>);
+  test("render component", async () => {
+    await renderComponent(<Text>Hello world</Text>);
 
     expect(screen.getByText("Hello world")).toBeOnTheScreen();
   });

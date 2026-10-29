@@ -14,7 +14,7 @@ export function Header({ title }: HeaderProps) {
       alignItems="center"
       mb="s56"
     >
-      <IconButton iconName="Chevron-left" onPress={router.back} />
+      <IconButton iconName="Chevron-left" onPress={() => router.back()} />
       <Text variant="title16">{title}</Text>
     </Box>
   );

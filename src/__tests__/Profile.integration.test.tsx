@@ -11,7 +11,7 @@ const mockedAuthUser: AuthUser = {
 
 describe("integration: Profile", () => {
   it("should update the profile info", async () => {
-    renderApp({
+    await renderApp({
       isAuthenticated: true,
       repositories: {
         auth: {
@@ -20,7 +20,7 @@ describe("integration: Profile", () => {
       },
     });
 
-    fireEvent.press(await screen.findByText("Perfil"));
+    await fireEvent.press(await screen.findByText("Perfil"));
 
     expect(await screen.findByText(/Informações da Conta/i)).toBeOnTheScreen();
 
@@ -28,15 +28,15 @@ describe("integration: Profile", () => {
     expect(await screen.findByText("lucas@coffstack.com")).toBeOnTheScreen();
     expect(await screen.findByText("junho 2025")).toBeOnTheScreen();
 
-    fireEvent.press(screen.getByText(/editar perfil/i));
+    await fireEvent.press(screen.getByText(/editar perfil/i));
     expect(await screen.findByText(/Atualizar Perfil/i)).toBeOnTheScreen();
 
-    fireEvent.changeText(
+    await fireEvent.changeText(
       screen.getByTestId("fullname-input"),
       "Lucas Coffstack",
     );
 
-    fireEvent.press(screen.getByTestId("submit-button"));
+    await fireEvent.press(screen.getByTestId("submit-button"));
 
     // verify toast message
     expect(

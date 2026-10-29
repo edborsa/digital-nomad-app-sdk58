@@ -6,22 +6,28 @@ import { SignUpForm } from "./SignUpForm";
 describe("<SignUpForm />", () => {
   it("should submit the form when all fields are filled in correctly", async () => {
     const onSubmitMock = jest.fn();
-    renderComponent(<SignUpForm onSubmit={onSubmitMock} />);
+    await renderComponent(<SignUpForm onSubmit={onSubmitMock} />);
 
-    fireEvent.changeText(screen.getByTestId("fullname-input"), "Lucas Garcez");
+    await fireEvent.changeText(
+      screen.getByTestId("fullname-input"),
+      "Lucas Garcez",
+    );
 
-    fireEvent.changeText(
+    await fireEvent.changeText(
       screen.getByTestId("email-input"),
       "lucas@coffstack.com",
     );
 
-    fireEvent.changeText(screen.getByTestId("password-input"), "12345678");
-    fireEvent.changeText(
+    await fireEvent.changeText(
+      screen.getByTestId("password-input"),
+      "12345678",
+    );
+    await fireEvent.changeText(
       screen.getByTestId("confirm-password-input"),
       "12345678",
     );
 
-    fireEvent.press(screen.getByTestId("submit-button"));
+    await fireEvent.press(screen.getByTestId("submit-button"));
 
     await waitFor(() => {
       expect(onSubmitMock).toHaveBeenCalledWith(
@@ -38,25 +44,28 @@ describe("<SignUpForm />", () => {
   describe("should NOT submit form", () => {
     it("when the password and confirm password do not match", async () => {
       const onSubmitMock = jest.fn();
-      renderComponent(<SignUpForm onSubmit={onSubmitMock} />);
+      await renderComponent(<SignUpForm onSubmit={onSubmitMock} />);
 
-      fireEvent.changeText(
+      await fireEvent.changeText(
         screen.getByTestId("fullname-input"),
         "Lucas Garcez",
       );
 
-      fireEvent.changeText(
+      await fireEvent.changeText(
         screen.getByTestId("email-input"),
         "lucas@coffstack.com",
       );
 
-      fireEvent.changeText(screen.getByTestId("password-input"), "12345678");
-      fireEvent.changeText(
+      await fireEvent.changeText(
+        screen.getByTestId("password-input"),
+        "12345678",
+      );
+      await fireEvent.changeText(
         screen.getByTestId("confirm-password-input"),
         "another-password",
       );
 
-      fireEvent.press(screen.getByTestId("submit-button"));
+      await fireEvent.press(screen.getByTestId("submit-button"));
 
       expect(await screen.findByText("senhas devem ser iguais"));
 
@@ -70,22 +79,28 @@ describe("<SignUpForm />", () => {
 
     it("when the email is invalid", async () => {
       const onSubmitMock = jest.fn();
-      renderComponent(<SignUpForm onSubmit={onSubmitMock} />);
+      await renderComponent(<SignUpForm onSubmit={onSubmitMock} />);
 
-      fireEvent.changeText(
+      await fireEvent.changeText(
         screen.getByTestId("fullname-input"),
         "Lucas Garcez",
       );
 
-      fireEvent.changeText(screen.getByTestId("email-input"), "invalid-email");
+      await fireEvent.changeText(
+        screen.getByTestId("email-input"),
+        "invalid-email",
+      );
 
-      fireEvent.changeText(screen.getByTestId("password-input"), "12345678");
-      fireEvent.changeText(
+      await fireEvent.changeText(
+        screen.getByTestId("password-input"),
+        "12345678",
+      );
+      await fireEvent.changeText(
         screen.getByTestId("confirm-password-input"),
         "12345678",
       );
 
-      fireEvent.press(screen.getByTestId("submit-button"));
+      await fireEvent.press(screen.getByTestId("submit-button"));
 
       expect(await screen.findByText("email inválido"));
 

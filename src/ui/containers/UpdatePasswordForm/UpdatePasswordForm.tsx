@@ -76,7 +76,7 @@ export function UpdatePasswordForm({ onSubmit }: UpdatePasswordFormProps) {
         testID="submit-button"
         mt="s16"
         title="Atualizar"
-        onPress={handleSubmit(onSubmit)}
+        onPress={() => handleSubmit(onSubmit)()}
       />
     </Box>
   );

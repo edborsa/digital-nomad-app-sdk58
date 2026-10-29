@@ -4,10 +4,10 @@ import { fireEvent, screen } from "@testing-library/react-native";
 export async function signIn(email: string, password: string) {
   expect(await screen.findByText("Bem-vindo")).toBeOnTheScreen();
 
-  fireEvent.changeText(screen.getByPlaceholderText("seu email"), email);
-  fireEvent.changeText(
+  await fireEvent.changeText(screen.getByPlaceholderText("seu email"), email);
+  await fireEvent.changeText(
     screen.getByPlaceholderText("digite sua senha"),
     password,
   );
-  fireEvent.press(screen.getByText(/entrar/i));
+  await fireEvent.press(screen.getByText(/entrar/i));
 }

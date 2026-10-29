@@ -85,7 +85,7 @@ export function SignUpForm({ onSubmit }: SignUpFormProps) {
         testID="submit-button"
         mt="s16"
         title="Criar conta"
-        onPress={handleSubmit(onSubmit)}
+        onPress={() => handleSubmit(onSubmit)()}
       />
     </Box>
   );

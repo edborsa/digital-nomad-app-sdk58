@@ -4,7 +4,7 @@ import { signIn } from "../test-utils/signIn";
 
 describe("integration: Auth Flow", () => {
   test("the user can sign-in and sign-out", async () => {
-    renderApp();
+    await renderApp();
 
     await signIn("lucas@coffstack.com", "12345678");
 
@@ -18,12 +18,42 @@ describe("integration: Auth Flow", () => {
     expect(screen.getByText("Bangkok")).toBeOnTheScreen();
 
     // press the profile tab
-    fireEvent.press(screen.getByText("Perfil"));
+    await fireEvent.press(screen.getByText("Perfil"));
 
     // press the sign-out button
-    fireEvent.press(screen.getByText("Sair"));
+    await fireEvent.press(screen.getByText("Sair"));
 
     // verify if user is in the sign-in screen
     expect(await screen.findByText("Bem-vindo"));
+  });
+
+  test("a new user can sign up and returns to sign-in", async () => {
+    await renderApp();
+
+    await fireEvent.press(await screen.findByTestId("sign-up-link"));
+
+    await fireEvent.changeText(
+      await screen.findByTestId("fullname-input"),
+      "Ana Lima",
+    );
+    await fireEvent.changeText(
+      screen.getByTestId("email-input"),
+      "ana@coffstack.com",
+    );
+    await fireEvent.changeText(
+      screen.getByTestId("password-input"),
+      "12345678",
+    );
+    await fireEvent.changeText(
+      screen.getByTestId("confirm-password-input"),
+      "12345678",
+    );
+    await fireEvent.press(screen.getByTestId("submit-button"));
+
+    expect(
+      await screen.findByText("cadastro feito com sucesso"),
+    ).toBeOnTheScreen();
+    expect(await screen.findByText("Bem-vindo")).toBeOnTheScreen();
+    expect(screen.queryByTestId("fullname-input")).not.toBeOnTheScreen();
   });
 });

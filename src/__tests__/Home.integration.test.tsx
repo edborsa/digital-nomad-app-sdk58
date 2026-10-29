@@ -8,18 +8,18 @@ import { renderApp } from "../test-utils/renderApp";
 
 describe("integration: Home", () => {
   it("should display the city list and navigate to details when the city card is pressed", async () => {
-    renderApp({ isAuthenticated: true });
+    await renderApp({ isAuthenticated: true });
 
-    fireEvent.press(await screen.findByText("Rio de Janeiro"));
+    await fireEvent.press(await screen.findByText("Rio de Janeiro"));
 
     expect(await screen.findByText("Pontos turísticos")).toBeOnTheScreen();
 
-    fireEvent.press(screen.getByTestId("Chevron-left"));
+    await fireEvent.press(screen.getByTestId("Chevron-left"));
 
     // Dubai city card
     expect(await screen.findByText("Dubai")).toBeOnTheScreen();
 
-    fireEvent.changeText(screen.getByTestId("search-input"), "barcelona");
+    await fireEvent.changeText(screen.getByTestId("search-input"), "barcelona");
 
     await waitForElementToBeRemoved(() => screen.getByText("Dubai"));
 
@@ -28,7 +28,7 @@ describe("integration: Home", () => {
   });
 
   it("should display an error message when city list does not load", async () => {
-    renderApp({
+    await renderApp({
       isAuthenticated: true,
       repositories: {
         city: {
@@ -46,7 +46,7 @@ describe("integration: Home", () => {
   });
 
   it("should display an empty message when city list is empty", async () => {
-    renderApp({
+    await renderApp({
       isAuthenticated: true,
       repositories: {
         city: {
@@ -65,7 +65,7 @@ describe("integration: Home", () => {
 
   it("should revert the favorite star when favoriting fails", async () => {
     let rejectToggle: (error: Error) => void = () => {};
-    renderApp({
+    await renderApp({
       isAuthenticated: true,
       repositories: {
         city: {
@@ -80,7 +80,7 @@ describe("integration: Home", () => {
     const favoriteButton = await screen.findByTestId(
       "favorite-button-rio-de-janeiro",
     );
-    fireEvent.press(favoriteButton);
+    await fireEvent.press(favoriteButton);
 
     expect(
       await within(favoriteButton).findByTestId("Favorite-fill"),

@@ -93,7 +93,7 @@ export function renderApp(options?: {
     );
   }
 
-  renderRouter(
+  return renderRouter(
     {
       _layout: () => <AppStack />,
       "(protected)/_layout": () => <ProtectedLayout />,

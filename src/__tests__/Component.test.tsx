@@ -36,32 +36,32 @@ describe("Component", () => {
   afterAll(() => {
     jest.useRealTimers();
   });
-  test("should display the label when is not loading", () => {
-    render(<Component label="Hello World" loading={false} />);
+  test("should display the label when is not loading", async () => {
+    await render(<Component label="Hello World" loading={false} />);
 
     const element = screen.getByText("Hello World");
 
     expect(element).toBeOnTheScreen();
   });
 
-  it("should display the loading text when is  loading", () => {
-    render(<Component label="Hello World" loading={true} />);
+  it("should display the loading text when is  loading", async () => {
+    await render(<Component label="Hello World" loading={true} />);
 
     expect(screen.getByText(/is loading.../i)).toBeOnTheScreen();
   });
 
-  it("should display the correct count number", () => {
-    render(<Component label="Hello World" loading={false} />);
+  it("should display the correct count number", async () => {
+    await render(<Component label="Hello World" loading={false} />);
 
     expect(screen.getByText(/Pressed:0/i)).toBeOnTheScreen();
 
-    fireEvent.press(screen.getByTestId("label-button"));
+    await fireEvent.press(screen.getByTestId("label-button"));
 
     expect(screen.getByText(/Pressed:1/i)).toBeOnTheScreen();
   });
 
   it("should display reset the count when press the reset text", async () => {
-    render(<Component label="Hello World" loading={false} />);
+    await render(<Component label="Hello World" loading={false} />);
 
     expect(screen.getByText(/Pressed:0/i)).toBeOnTheScreen();
 
@@ -77,7 +77,7 @@ describe("Component", () => {
 
 describe("User Event", () => {
   it("should display reset the count when press the reset text 2", async () => {
-    render(<Component label="Hello World" loading={false} />);
+    await render(<Component label="Hello World" loading={false} />);
 
     expect(screen.getByText(/Pressed:0/i)).toBeOnTheScreen();
 
