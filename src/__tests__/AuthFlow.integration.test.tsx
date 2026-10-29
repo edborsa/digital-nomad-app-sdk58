@@ -1,4 +1,5 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react-native";
+import { issueFakeJwt } from "../infra/repositories/adapters/inMemory/fakeJwt";
 import { renderApp } from "../test-utils/renderApp";
 import { signIn } from "../test-utils/signIn";
 
@@ -32,15 +33,9 @@ describe("integration: Auth Flow", () => {
     await renderApp({
       repositories: {
         auth: {
-          signIn: (email: string) =>
+          signIn: () =>
             new Promise((resolve) => {
-              resolveSignIn = () =>
-                resolve({
-                  id: "1",
-                  email,
-                  fullname: "Lucas Garcez",
-                  createdAt: "2025-06-23T10:32:55.10671Z",
-                });
+              resolveSignIn = () => resolve(issueFakeJwt("1"));
             }),
         },
       },

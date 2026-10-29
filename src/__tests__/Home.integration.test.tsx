@@ -8,7 +8,7 @@ import { renderApp } from "../test-utils/renderApp";
 
 describe("integration: Home", () => {
   it("should display the city list and navigate to details when the city card is pressed", async () => {
-    await renderApp({ isAuthenticated: true });
+    await renderApp({ initialSession: "signedIn" });
 
     await fireEvent.press(await screen.findByText("Rio de Janeiro"));
 
@@ -28,7 +28,7 @@ describe("integration: Home", () => {
   });
 
   it("should mark the category pill as selected when filtering by it", async () => {
-    await renderApp({ isAuthenticated: true });
+    await renderApp({ initialSession: "signedIn" });
 
     const beachPill = await screen.findByTestId("category-pill-beach");
     expect(beachPill).not.toBeSelected();
@@ -40,7 +40,7 @@ describe("integration: Home", () => {
 
   it("should display an error message when city list does not load", async () => {
     await renderApp({
-      isAuthenticated: true,
+      initialSession: "signedIn",
       repositories: {
         city: {
           findAll: async () => {
@@ -58,7 +58,7 @@ describe("integration: Home", () => {
 
   it("should display an empty message when city list is empty", async () => {
     await renderApp({
-      isAuthenticated: true,
+      initialSession: "signedIn",
       repositories: {
         city: {
           findAll: async () => {
@@ -77,7 +77,7 @@ describe("integration: Home", () => {
   it("should revert the favorite star when favoriting fails", async () => {
     let rejectToggle: (error: Error) => void = () => {};
     await renderApp({
-      isAuthenticated: true,
+      initialSession: "signedIn",
       repositories: {
         city: {
           toggleFavorite: () =>

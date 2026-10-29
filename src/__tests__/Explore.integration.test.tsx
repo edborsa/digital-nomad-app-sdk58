@@ -3,7 +3,7 @@ import { renderApp } from "../test-utils/renderApp";
 
 describe("integration: Explore", () => {
   it("should show cities grouped under their category", async () => {
-    await renderApp({ isAuthenticated: true });
+    await renderApp({ initialSession: "signedIn" });
 
     await fireEvent.press(await screen.findByText("Explorar"));
 

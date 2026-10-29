@@ -5,7 +5,7 @@ import { restartApp } from "../test-utils/restartApp";
 
 describe("integration: Theme preference", () => {
   it("should follow the system theme until the learner picks one", async () => {
-    await renderApp({ isAuthenticated: true });
+    await renderApp({ initialSession: "signedIn" });
 
     await fireEvent.press(await screen.findByText("Perfil"));
 
@@ -15,7 +15,7 @@ describe("integration: Theme preference", () => {
   });
 
   it("should apply the chosen dark theme and remember it after a restart", async () => {
-    await renderApp({ isAuthenticated: true });
+    await renderApp({ initialSession: "signedIn" });
     await fireEvent.press(await screen.findByText("Perfil"));
 
     await fireEvent.press(await screen.findByTestId("theme-option-dark"));
@@ -27,7 +27,7 @@ describe("integration: Theme preference", () => {
     await restartApp();
     expect(colorScheme.get()).toBe("light");
 
-    await renderApp({ isAuthenticated: true });
+    await renderApp({ initialSession: "signedIn" });
     await fireEvent.press(await screen.findByText("Perfil"));
 
     await waitFor(() =>

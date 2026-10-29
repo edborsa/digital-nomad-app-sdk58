@@ -12,7 +12,7 @@ const mockedAuthUser: AuthUser = {
 describe("integration: Profile", () => {
   it("should update the profile info", async () => {
     await renderApp({
-      isAuthenticated: true,
+      initialSession: "signedIn",
       repositories: {
         auth: {
           getUser: () => mockedAuthUser,
@@ -48,7 +48,7 @@ describe("integration: Profile", () => {
 
   it("should update the password and return to the profile", async () => {
     await renderApp({
-      isAuthenticated: true,
+      initialSession: "signedIn",
       repositories: {
         auth: {
           getUser: () => mockedAuthUser,

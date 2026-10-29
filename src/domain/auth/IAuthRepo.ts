@@ -16,7 +16,8 @@ export type AuthUpdatePasswordParams = {
 };
 
 export interface IAuthRepo {
-  signIn: (email: string, password: string) => Promise<AuthUser>;
+  /** Resolves with the Session token */
+  signIn: (email: string, password: string) => Promise<string>;
   signOut: () => Promise<void>;
   signUp: (params: AuthSignUpParams) => Promise<void>;
   sendResetPasswordEmail: (email: string) => Promise<void>;

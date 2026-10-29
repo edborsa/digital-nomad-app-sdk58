@@ -4,17 +4,18 @@ import {
   AuthUpdateProfileParams,
   IAuthRepo,
 } from "@/src/domain/auth/IAuthRepo";
+import { getSessionUserId } from "@/src/domain/auth/useSessionStore";
 import { authUsers } from "./data/authUsers";
+import { issueFakeJwt } from "./fakeJwt";
 
 export class InMemoryAuthRepo implements IAuthRepo {
-  // The AuthUser of the current Session; defaults to the first user, like an already signed-in device
-  private currentUser: AuthUser = authUsers[0];
+  // Profile edits by AuthUser id, layered over the seeded users
+  private profileEdits = new Map<string, AuthUpdateProfileParams>();
 
-  async signIn(email: string, password: string): Promise<AuthUser> {
+  async signIn(email: string, password: string): Promise<string> {
     const user = authUsers.find((user) => user.email === email);
     if (user) {
-      this.currentUser = { ...user };
-      return this.currentUser;
+      return issueFakeJwt(user.id);
     }
 
     throw new Error("user not found");
@@ -39,15 +40,26 @@ export class InMemoryAuthRepo implements IAuthRepo {
     console.log("the reset password has been sent:", email);
   }
 
+  // Like a backend reading the bearer token, the AuthUser is whoever the Session belongs to
   async getUser(): Promise<AuthUser> {
-    return this.currentUser;
+    const user = this.findSessionUser();
+    return { ...user, ...this.profileEdits.get(user.id) };
   }
 
   async updateProfile(params: AuthUpdateProfileParams): Promise<void> {
-    this.currentUser = { ...this.currentUser, ...params };
+    this.profileEdits.set(this.findSessionUser().id, params);
   }
 
   async updatePassword(): Promise<void> {
     return;
+  }
+
+  private findSessionUser(): AuthUser {
+    const userId = getSessionUserId();
+    const user = authUsers.find((user) => user.id === userId);
+    if (!user) {
+      throw new Error("not signed in");
+    }
+    return user;
   }
 }

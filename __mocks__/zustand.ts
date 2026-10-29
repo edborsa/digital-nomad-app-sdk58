@@ -1,5 +1,6 @@
 // Zustand's official Jest mock: every store goes back to its initial state after each test
 // https://zustand.docs.pmnd.rs/guides/testing#jest
+import { act } from "react";
 import type * as ZustandExportedTypes from "zustand";
 export * from "zustand";
 
@@ -46,10 +47,12 @@ export const createStore = (<T>(
     : createStoreUncurried;
 }) as typeof ZustandExportedTypes.createStore;
 
-// Unlike the official mock, the reset isn't wrapped in act(): importing the testing
-// library from this mock broke every render after a file's first test.
+// The official mock takes act() from the testing library; importing that from this
+// mock broke every render after a file's first test, so React's own act() is used
 afterEach(() => {
-  storeResetFns.forEach((resetFn) => {
-    resetFn();
+  act(() => {
+    storeResetFns.forEach((resetFn) => {
+      resetFn();
+    });
   });
 });

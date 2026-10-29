@@ -2,24 +2,23 @@ import { useFeedbackService } from "@/src/infra/feedbackService/FeedbackProvider
 import { useAppMutation } from "@/src/infra/operations/useAppMutation";
 import { useRepository } from "@/src/infra/repositories/RepositoryProvider";
 import { errorUtils } from "@/src/utils/errorUtils";
-import { useAuth } from "../AuthContext";
-import { AuthUser } from "../AuthUser";
+import { useSessionStore } from "../useSessionStore";
 
 export function useAuthSignIn() {
   const { auth } = useRepository();
   const feedbackService = useFeedbackService();
-  const { saveAuthUser } = useAuth();
+  const startSession = useSessionStore((state) => state.signIn);
 
   const { mutate, error, isPending } = useAppMutation<
-    AuthUser,
+    string,
     { email: string; password: string }
   >({
     mutationFn: ({ email, password }) => auth.signIn(email, password),
-    onSuccess: (authUser) => {
-      saveAuthUser(authUser);
+    onSuccess: (token, { email }) => {
+      startSession(token);
       feedbackService.send({
         type: "success",
-        message: `signed in: ${authUser.email}`,
+        message: `signed in: ${email}`,
       });
     },
     onError: (error) => {

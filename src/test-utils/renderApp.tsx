@@ -10,16 +10,15 @@ import SignUpScreen from "@/app/sign-up";
 import { renderRouter } from "expo-router/testing-library";
 import { AppStack } from "../ui/navigation/AppStack";
 
-import { AuthContext, AuthProvider } from "../domain/auth/AuthContext";
-import { AuthUser } from "../domain/auth/AuthUser";
 import { Repositories } from "../domain/Repositories";
+import { SessionStatus, useSessionStore } from "../domain/auth/useSessionStore";
+import { authUsers } from "../infra/repositories/adapters/inMemory/data/authUsers";
+import { issueFakeJwt } from "../infra/repositories/adapters/inMemory/fakeJwt";
 import { Toast } from "../infra/feedbackService/adapters/Toast/Toast";
 import { ToastFeedback } from "../infra/feedbackService/adapters/Toast/ToastFeedback";
 import { FeedbackProvider } from "../infra/feedbackService/FeedbackProvider";
 import { InMemoryRepository } from "../infra/repositories/adapters/inMemory";
 import { RepositoryProvider } from "../infra/repositories/RepositoryProvider";
-import { inMemoryStorage } from "../infra/storage/adapters/InMemoryStorage";
-import { StorageProvider } from "../infra/storage/StorageContext";
 
 import UpdatePasswordScreen from "@/app/(protected)/update-password";
 import UpdateProfileScreen from "@/app/(protected)/update-profile";
@@ -32,30 +31,9 @@ type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
 };
 
-function MockedAuthProvider({ children }: React.PropsWithChildren) {
-  const authUser: AuthUser = {
-    email: "lucas@coffstack.com",
-    id: "1",
-    fullname: "Lucas Garcez",
-    createdAt: "2025-06-23T10:32:55.10671Z",
-  };
-
-  return (
-    <AuthContext.Provider
-      value={{
-        isReady: true,
-        authUser,
-        saveAuthUser: async () => {},
-        removeAuthUser: async () => {},
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
-  );
-}
-
 export function renderApp(options?: {
-  isAuthenticated?: boolean;
+  /** Applied to the Session store; when left out, the Session is whatever was restored */
+  initialSession?: Exclude<SessionStatus, "restoring">;
   repositories?: DeepPartial<Repositories>;
 }) {
   const finalRepository: Repositories = merge(
@@ -65,23 +43,21 @@ export function renderApp(options?: {
 
   const client = new QueryClient(queryClientOptions);
 
-  const FinalAuthProvider = options?.isAuthenticated
-    ? MockedAuthProvider
-    : AuthProvider;
+  if (options?.initialSession === "signedIn") {
+    useSessionStore.getState().signIn(issueFakeJwt(authUsers[0].id));
+  } else if (options?.initialSession === "signedOut") {
+    useSessionStore.getState().signOut();
+  }
 
   function Wrapper({ children }: React.PropsWithChildren) {
     return (
       <QueryClientProvider client={client}>
-        <StorageProvider storage={inMemoryStorage}>
-          <FinalAuthProvider>
-            <FeedbackProvider value={ToastFeedback}>
-              <RepositoryProvider value={finalRepository}>
-                {children}
-                <Toast />
-              </RepositoryProvider>
-            </FeedbackProvider>
-          </FinalAuthProvider>
-        </StorageProvider>
+        <FeedbackProvider value={ToastFeedback}>
+          <RepositoryProvider value={finalRepository}>
+            {children}
+            <Toast />
+          </RepositoryProvider>
+        </FeedbackProvider>
       </QueryClientProvider>
     );
   }

@@ -1,11 +1,8 @@
-import { AuthProvider } from "@/src/domain/auth/AuthContext";
 import { Toast } from "@/src/infra/feedbackService/adapters/Toast/Toast";
 import { ToastFeedback } from "@/src/infra/feedbackService/adapters/Toast/ToastFeedback";
 import { FeedbackProvider } from "@/src/infra/feedbackService/FeedbackProvider";
 import { InMemoryRepository } from "@/src/infra/repositories/adapters/inMemory";
 import { RepositoryProvider } from "@/src/infra/repositories/RepositoryProvider";
-import { AsyncStorage } from "@/src/infra/storage/adapters/AsyncStorage";
-import { StorageProvider } from "@/src/infra/storage/StorageContext";
 import { AppStack } from "@/src/ui/navigation/AppStack";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useFonts } from "expo-font";
@@ -50,17 +47,13 @@ export default function RootLayout() {
 
   return (
     <QueryClientProvider client={client}>
-      <StorageProvider storage={AsyncStorage}>
-        <AuthProvider>
-          <FeedbackProvider value={ToastFeedback}>
-            <RepositoryProvider value={InMemoryRepository}>
-              <AppStack />
-              <StatusBar style="auto" />
-              <Toast />
-            </RepositoryProvider>
-          </FeedbackProvider>
-        </AuthProvider>
-      </StorageProvider>
+      <FeedbackProvider value={ToastFeedback}>
+        <RepositoryProvider value={InMemoryRepository}>
+          <AppStack />
+          <StatusBar style="auto" />
+          <Toast />
+        </RepositoryProvider>
+      </FeedbackProvider>
     </QueryClientProvider>
   );
 }

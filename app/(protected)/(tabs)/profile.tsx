@@ -22,7 +22,7 @@ export default function ProfileScreen() {
             <Pressable
               testID="sign-out-button"
               accessibilityRole="button"
-              onPress={signOut}
+              onPress={() => signOut()}
               className="mt-6 min-h-11 flex-row items-center self-center"
             >
               <Icon name="Logout" className="text-error" />
