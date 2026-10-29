@@ -1,4 +1,4 @@
-import { Image } from "expo-image";
+import { Image } from "../primitives/Image";
 import { router } from "expo-router";
 import { ScrollView, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";

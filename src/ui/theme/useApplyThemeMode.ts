@@ -1,12 +1,16 @@
 import { usePreferencesStore } from "@/src/domain/preferences/usePreferencesStore";
-import { colorScheme } from "nativewind";
+import { Appearance } from "react-native";
 import { useEffect } from "react";
 
-// Keeps NativeWind's colour scheme on the chosen theme mode, from start-up onwards
+// Keeps the device appearance, which picks the light or dark styles, on the chosen
+// theme mode from start-up onwards
 export function useApplyThemeMode() {
   const themeMode = usePreferencesStore((state) => state.themeMode);
 
   useEffect(() => {
-    colorScheme.set(themeMode);
+    // "unspecified" hands the appearance back to the device setting
+    Appearance.setColorScheme(
+      themeMode === "system" ? "unspecified" : themeMode,
+    );
   }, [themeMode]);
 }

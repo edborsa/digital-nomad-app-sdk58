@@ -33,7 +33,7 @@ export function BottomSheetMap({
         testID="close-map-button"
         iconName="Close"
         accessibilityLabel="Fechar mapa"
-        className="absolute right-4 top-4"
+        className="absolute top-4 right-4"
         onPress={bottomSheetProps.onPress}
       />
     </BottomSheet>

@@ -1,6 +1,6 @@
 import { Pressable, useWindowDimensions, View } from "react-native";
 
-import { Image } from "expo-image";
+import { Image } from "../primitives/Image";
 import { Link } from "expo-router";
 
 import { CityPreview } from "@/src/domain/city/City";

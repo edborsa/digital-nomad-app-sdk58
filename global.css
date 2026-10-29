@@ -1,40 +1,93 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css";
+@import "nativewind/theme";
 
-/* The only place raw colour values live: RGB channels per theme */
+/* The only place raw colour values live, per theme. The dark set follows the
+   device appearance, which the learner's theme preference sets. */
 :root {
-  --color-background: 255 255 255;
-  --color-surface: 244 244 245;
-  --color-border: 212 212 216;
-  --color-foreground: 27 27 27;
-  --color-muted: 113 113 122;
-  --color-primary: 229 57 57;
-  --color-primary-foreground: 255 255 255;
-  --color-success: 46 125 50;
-  --color-success-muted: 232 245 233;
-  --color-error: 198 40 40;
-  --color-error-muted: 253 236 234;
-  --color-warning: 178 106 0;
-  --color-warning-muted: 255 244 229;
-  --color-info: 21 101 192;
-  --color-info-muted: 227 242 253;
+  --background: rgb(255 255 255);
+  --surface: rgb(244 244 245);
+  --border: rgb(212 212 216);
+  --foreground: rgb(27 27 27);
+  --muted: rgb(113 113 122);
+  --primary: rgb(229 57 57);
+  --primary-foreground: rgb(255 255 255);
+  /* Primary at 40%, spelled out because color-mix() isn't reliable on native */
+  --primary-glow: rgb(229 57 57 / 0.4);
+  --success: rgb(46 125 50);
+  --success-muted: rgb(232 245 233);
+  --error: rgb(198 40 40);
+  --error-muted: rgb(253 236 234);
+  --warning: rgb(178 106 0);
+  --warning-muted: rgb(255 244 229);
+  --info: rgb(21 101 192);
+  --info-muted: rgb(227 242 253);
 }
 
-.dark:root {
-  --color-background: 27 27 27;
-  --color-surface: 48 46 45;
-  --color-border: 92 92 92;
-  --color-foreground: 255 255 255;
-  --color-muted: 163 163 163;
-  --color-primary: 255 75 75;
-  --color-primary-foreground: 255 255 255;
-  --color-success: 76 175 80;
-  --color-success-muted: 30 51 32;
-  --color-error: 211 47 47;
-  --color-error-muted: 58 27 27;
-  --color-warning: 255 193 7;
-  --color-warning-muted: 51 43 26;
-  --color-info: 66 165 245;
-  --color-info-muted: 26 43 58;
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: rgb(27 27 27);
+    --surface: rgb(48 46 45);
+    --border: rgb(92 92 92);
+    --foreground: rgb(255 255 255);
+    --muted: rgb(163 163 163);
+    --primary: rgb(255 75 75);
+    --primary-foreground: rgb(255 255 255);
+    --primary-glow: rgb(255 75 75 / 0.4);
+    --success: rgb(76 175 80);
+    --success-muted: rgb(30 51 32);
+    --error: rgb(211 47 47);
+    --error-muted: rgb(58 27 27);
+    --warning: rgb(255 193 7);
+    --warning-muted: rgb(51 43 26);
+    --info: rgb(66 165 245);
+    --info-muted: rgb(26 43 58);
+  }
+}
+
+@theme inline {
+  /* Semantic colours only; they resolve per theme through the values above */
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-success: var(--success);
+  --color-success-muted: var(--success-muted);
+  --color-error: var(--error);
+  --color-error-muted: var(--error-muted);
+  --color-warning: var(--warning);
+  --color-warning-muted: var(--warning-muted);
+  --color-info: var(--info);
+  --color-info-muted: var(--info-muted);
+
+  --shadow-primary: 3px 3px 10px 3px var(--primary-glow);
+}
+
+@theme {
+  /* One family per weight, so native picks the right font file */
+  --font-poppins: PoppinsRegular;
+  --font-poppins-semibold: PoppinsSemiBold;
+
+  /* Text roles; line heights leave room for large font scales. Line heights are ratios
+     of the font size: on native a px line height loses its unit and is read as a ratio */
+  --text-display: 28px;
+  --text-display--line-height: calc(36 / 28);
+  --text-title: 22px;
+  --text-title--line-height: calc(30 / 22);
+  --text-heading: 16px;
+  --text-heading--line-height: calc(24 / 16);
+  --text-label: 14px;
+  --text-label--line-height: calc(20 / 14);
+  --text-body-lg: 18px;
+  --text-body-lg--line-height: calc(28 / 18);
+  --text-body: 16px;
+  --text-body--line-height: calc(24 / 16);
+  --text-body-sm: 14px;
+  --text-body-sm--line-height: calc(20 / 14);
+  --text-caption: 12px;
+  --text-caption--line-height: calc(16 / 12);
 }

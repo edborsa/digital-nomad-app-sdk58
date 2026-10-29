@@ -1,6 +1,6 @@
 import { ClassNameValue, extendTailwindMerge } from "tailwind-merge";
 
-// The text roles from tailwind.config.js, so they merge as font sizes, not colours
+// The text roles from global.css, so they merge as font sizes, not colours
 const twMerge = extendTailwindMerge({
   extend: {
     classGroups: {

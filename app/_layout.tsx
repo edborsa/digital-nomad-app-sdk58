@@ -9,7 +9,6 @@ import { useFonts } from "expo-font";
 import { StatusBar } from "expo-status-bar";
 import "react-native-reanimated";
 import "../global.css";
-import "@/src/ui/primitives/interop";
 
 const client = new QueryClient();
 

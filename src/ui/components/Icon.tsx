@@ -1,17 +1,16 @@
 import createIconSetFromIcoMoon from "@expo/vector-icons/createIconSetFromIcoMoon";
-import { cssInterop } from "nativewind";
+import { styled } from "nativewind";
 import { cn } from "../primitives/cn";
 
-const IconFromIcoMoon = createIconSetFromIcoMoon(
-  require("../../../assets/icons/selection.json"),
-  "IcoMoon",
-  "icomoon.ttf",
+// Text colour classes (text-primary, text-muted) set the icon colour
+const IconFromIcoMoon = styled(
+  createIconSetFromIcoMoon(
+    require("../../../assets/icons/selection.json"),
+    "IcoMoon",
+    "icomoon.ttf",
+  ),
+  { className: { target: "style", nativeStyleMapping: { color: true } } },
 );
-
-// Lets text colour classes (text-primary, text-muted) set the icon colour
-cssInterop(IconFromIcoMoon, {
-  className: { target: "style", nativeStyleToProp: { color: true } },
-});
 
 export type IconProps = {
   name: IconName;

@@ -1,8 +1,7 @@
-import { useColorScheme } from "nativewind";
-import { Image } from "react-native";
+import { Image, useColorScheme } from "react-native";
 
 export function Logo() {
-  const { colorScheme } = useColorScheme();
+  const colorScheme = useColorScheme();
 
   return (
     <Image
@@ -11,7 +10,7 @@ export function Logo() {
           ? require("../../../assets/images/logo.png")
           : require("../../../assets/images/logo-on-light.png")
       }
-      className="mb-[60px] mt-5 h-[60px] w-[150px] self-center"
+      className="mt-5 mb-[60px] h-[60px] w-[150px] self-center"
     />
   );
 }

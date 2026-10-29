@@ -1,5 +1,5 @@
 import { act, screen } from "@testing-library/react-native";
-import { colorScheme } from "nativewind";
+import { Appearance } from "react-native";
 import * as zustand from "zustand";
 import { useSessionStore } from "../domain/auth/useSessionStore";
 import { usePreferencesStore } from "../domain/preferences/usePreferencesStore";
@@ -24,7 +24,7 @@ export async function restartApp(options?: { holdRestore?: boolean }) {
   const deviceStorage = inMemoryStorage.snapshot();
   storeResetFns.forEach((resetFn) => resetFn());
   inMemoryStorage.restore(deviceStorage);
-  colorScheme.set("system");
+  Appearance.setColorScheme("unspecified");
 
   // Inside act(), so no routing work is left queued on the fake timers the next render resets
   const finishRestoring = () =>
