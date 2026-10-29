@@ -30,6 +30,7 @@ export function BottomSheetMap({
         />
       </View>
       <IconButton
+        testID="close-map-button"
         iconName="Close"
         accessibilityLabel="Fechar mapa"
         className="absolute right-4 top-4"

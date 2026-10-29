@@ -9,7 +9,7 @@ import { CityDetailsRelatedCities } from "@/src/ui/containers/CityDetailsRelated
 import { CityDetailsTouristAttractions } from "@/src/ui/containers/CityDetailsTouristAttractions";
 import { Text } from "@/src/ui/primitives/Text";
 import { useLocalSearchParams } from "expo-router";
-import { Pressable } from "react-native";
+import { Pressable, StyleSheet } from "react-native";
 import Animated, { FadeIn, useSharedValue } from "react-native-reanimated";
 
 const PAGE_ANIMATION_TIME = 1000;
@@ -60,7 +60,7 @@ export default function CityDetails() {
           />
 
           <Divider className="px-4" />
-          <Pressable onPress={toggleBottomSheet}>
+          <Pressable testID="city-details-map" onPress={toggleBottomSheet}>
             <CityDetailsMap location={city.location} />
           </Pressable>
 
@@ -68,7 +68,12 @@ export default function CityDetails() {
           <CityDetailsRelatedCities id={city.id} />
         </Animated.View>
       </Screen>
-      <Animated.View entering={FadeIn.duration(0).delay(PAGE_ANIMATION_TIME)}>
+      {/* Covers the screen so the sheet's backdrop can dim it; touches pass through to the page */}
+      <Animated.View
+        entering={FadeIn.duration(0).delay(PAGE_ANIMATION_TIME)}
+        style={StyleSheet.absoluteFill}
+        pointerEvents="box-none"
+      >
         <BottomSheetMap
           location={city.location}
           isOpen={bottomSheetIsOpen}

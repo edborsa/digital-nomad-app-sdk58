@@ -2,10 +2,10 @@ import { PropsWithChildren } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import Animated, {
   SharedValue,
+  useAnimatedProps,
   useAnimatedStyle,
   useDerivedValue,
   useSharedValue,
-  withDelay,
   withTiming,
 } from "react-native-reanimated";
 
@@ -42,15 +42,24 @@ export function BottomSheet({
 
   const backdropAnimatedStyle = useAnimatedStyle(() => ({
     opacity: 1 - progress.value,
-    zIndex: isOpen.value
-      ? 1
-      : withDelay(duration, withTiming(-1, { duration: 0 })),
+  }));
+
+  // A closed sheet's backdrop is invisible, so it must not catch taps meant for the page
+  const backdropAnimatedProps = useAnimatedProps(() => ({
+    pointerEvents: isOpen.value ? ("auto" as const) : ("none" as const),
   }));
 
   return (
     <>
-      <Animated.View style={[StyleSheet.absoluteFill, backdropAnimatedStyle]}>
-        <TouchableOpacity className="flex-1 bg-black/70" onPress={onPress} />
+      <Animated.View
+        style={[StyleSheet.absoluteFill, backdropAnimatedStyle]}
+        animatedProps={backdropAnimatedProps}
+      >
+        <TouchableOpacity
+          testID="bottom-sheet-backdrop"
+          className="flex-1 bg-black/70"
+          onPress={onPress}
+        />
       </Animated.View>
 
       <Animated.View

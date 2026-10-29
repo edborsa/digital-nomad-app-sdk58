@@ -86,10 +86,10 @@
     ],
     "coverageThreshold": {
       "global": {
-        "statements": 90.71,
+        "statements": 90.73,
         "branches": 80.68,
         "functions": 91.37,
-        "lines": 90.38
+        "lines": 90.4
       }
     },
     "setupFiles": [

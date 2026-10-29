@@ -1,0 +1,34 @@
+appId: com.eduardoborsa.digitalnomadapp
+---
+- launchApp:
+    clearState: true
+- runFlow: subflows/sign-in.yml
+
+- tapOn:
+    id: city-card-rio-de-janeiro
+- scrollUntilVisible:
+    element:
+      id: city-details-map
+- tapOn:
+    id: city-details-map
+- assertVisible:
+    id: close-map-button
+
+# The backdrop covers the page above the sheet; tapping it closes the map.
+# The sheet is 70% of the screen tall, so the backdrop's top edge is never under it.
+- tapOn:
+    id: bottom-sheet-backdrop
+    point: "50%,10%"
+- assertNotVisible:
+    id: close-map-button
+
+# Once closed, the page behind takes taps again
+# scrollUntilVisible scrolling up doesn't move the page on iOS; plain swipes do
+- swipe:
+    direction: DOWN
+- swipe:
+    direction: DOWN
+- tapOn:
+    id: back-button
+- assertVisible:
+    id: tab-home
