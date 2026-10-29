@@ -1,6 +1,6 @@
 import createIconSetFromIcoMoon from "@expo/vector-icons/createIconSetFromIcoMoon";
-import { ThemeColors } from "../theme/theme";
-import { useAppTheme } from "../theme/useAppTheme";
+import { cssInterop } from "nativewind";
+import { cn } from "../primitives/cn";
 
 const IconFromIcoMoon = createIconSetFromIcoMoon(
   require("../../../assets/icons/selection.json"),
@@ -8,14 +8,24 @@ const IconFromIcoMoon = createIconSetFromIcoMoon(
   "icomoon.ttf",
 );
 
+// Lets text colour classes (text-primary, text-muted) set the icon colour
+cssInterop(IconFromIcoMoon, {
+  className: { target: "style", nativeStyleToProp: { color: true } },
+});
+
 export type IconProps = {
   name: IconName;
-  color?: ThemeColors;
   size?: number;
+  className?: string;
 };
-export function Icon({ name, color = "gray2", size = 24 }: IconProps) {
-  const { colors } = useAppTheme();
-  return <IconFromIcoMoon name={name} size={size} color={colors[color]} />;
+export function Icon({ name, size = 24, className }: IconProps) {
+  return (
+    <IconFromIcoMoon
+      name={name}
+      size={size}
+      className={cn("text-muted", className)}
+    />
+  );
 }
 
 export type IconName =

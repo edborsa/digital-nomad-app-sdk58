@@ -1,9 +1,10 @@
-import { Box, BoxProps } from "./Box";
+import { View } from "react-native";
+import { cn } from "../primitives/cn";
 
-export function Divider(props: BoxProps) {
+export function Divider({ className }: { className?: string }) {
   return (
-    <Box marginVertical="s24" {...props}>
-      <Box alignSelf="center" width="100%" height={1} backgroundColor="gray1" />
-    </Box>
+    <View className={cn("my-6", className)}>
+      <View className="h-px w-full self-center bg-border" />
+    </View>
   );
 }

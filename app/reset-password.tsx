@@ -1,5 +1,5 @@
 import { useAuthSendResetPasswordEmail } from "@/src/domain/auth/operations/useAuthSendResetPasswordEmail";
-import { Button } from "@/src/ui/components/Button";
+import { Button } from "@/src/ui/primitives/Button";
 import { Screen } from "@/src/ui/components/Screen";
 import { Text } from "@/src/ui/components/Text";
 import { TextInput } from "@/src/ui/components/TextInput";

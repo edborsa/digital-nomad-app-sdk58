@@ -1,5 +1,5 @@
 import { Box } from "../../components/Box";
-import { Button } from "../../components/Button";
+import { Button } from "../../primitives/Button";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
@@ -83,7 +83,7 @@ export function SignUpForm({ onSubmit }: SignUpFormProps) {
 
       <Button
         testID="submit-button"
-        mt="s16"
+        className="mt-4"
         title="Criar conta"
         onPress={() => handleSubmit(onSubmit)()}
       />

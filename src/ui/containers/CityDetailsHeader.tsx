@@ -42,9 +42,10 @@ export function CityDetailsHeader({
           <IconButton
             testID="back-button"
             iconName="Chevron-left"
+            accessibilityLabel="Voltar"
             onPress={() => router.back()}
           />
-          <CityFavoriteButton size={30} city={{ id, isFavorite }} />
+          <CityFavoriteButton size={30} city={{ id, isFavorite }} onImage />
         </Box>
       </Box>
 

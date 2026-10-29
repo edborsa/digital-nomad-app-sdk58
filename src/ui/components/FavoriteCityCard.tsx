@@ -1,62 +1,54 @@
-import { Image, Pressable, useWindowDimensions } from "react-native";
+import { Image, Pressable, useWindowDimensions, View } from "react-native";
 
 import { Link } from "expo-router";
-import { useAppTheme } from "../theme/useAppTheme";
 
 import { CityPreview } from "@/src/domain/city/City";
-import { Box } from "./Box";
+import { cn } from "../primitives/cn";
+import { Text } from "../primitives/Text";
 import { CityFavoriteButton } from "./CityFavoriteButton";
-import { Text } from "./Text";
 
 type FavoriteCityCardProps = {
   cityPreview: CityPreview;
+  className?: string;
 };
 
-export function FavoriteCityCard({ cityPreview }: FavoriteCityCardProps) {
-  const { borderRadii } = useAppTheme();
-
+export function FavoriteCityCard({
+  cityPreview,
+  className,
+}: FavoriteCityCardProps) {
   const { width } = useWindowDimensions();
   const IMAGE_WIDTH = width * 0.3;
   const IMAGE_HEIGHT = IMAGE_WIDTH * 0.75;
 
   return (
     <Link push href={`/city-details/${cityPreview.id}`} asChild>
-      <Pressable testID={`favorite-city-card-${cityPreview.id}`}>
-        <Box
-          flexDirection="row"
-          backgroundColor="gray1"
-          padding="s12"
-          borderRadius="default"
-          justifyContent="space-between"
-        >
-          <Box flexDirection="row">
-            <Image
-              source={
-                typeof cityPreview.coverImage === "number"
-                  ? cityPreview.coverImage
-                  : { uri: cityPreview.coverImage }
-              }
-              style={[
-                {
-                  width: IMAGE_WIDTH,
-                  height: IMAGE_HEIGHT,
-                  borderRadius: borderRadii.default,
-                },
-              ]}
-            />
+      <Pressable
+        testID={`favorite-city-card-${cityPreview.id}`}
+        className={cn(
+          "flex-row justify-between rounded-2xl bg-surface p-3",
+          className,
+        )}
+      >
+        <View className="flex-row">
+          <Image
+            source={
+              typeof cityPreview.coverImage === "number"
+                ? cityPreview.coverImage
+                : { uri: cityPreview.coverImage }
+            }
+            className="rounded-2xl"
+            style={{ width: IMAGE_WIDTH, height: IMAGE_HEIGHT }}
+          />
 
-            <Box ml="s16" justifyContent="center">
-              <Text variant="title16">{cityPreview.name}</Text>
-              <Text variant="text16">{cityPreview.country}</Text>
-            </Box>
-          </Box>
+          <View className="ml-4 justify-center">
+            <Text variant="heading">{cityPreview.name}</Text>
+            <Text>{cityPreview.country}</Text>
+          </View>
+        </View>
 
-          <Box>
-            <Box alignSelf="flex-end">
-              <CityFavoriteButton city={cityPreview} />
-            </Box>
-          </Box>
-        </Box>
+        <View className="self-start">
+          <CityFavoriteButton city={cityPreview} />
+        </View>
       </Pressable>
     </Link>
   );

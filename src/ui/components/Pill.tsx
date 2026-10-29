@@ -1,7 +1,7 @@
 import { Pressable, PressableProps } from "react-native";
-import { Box, BoxProps } from "./Box";
+import { cn } from "../primitives/cn";
+import { Text } from "../primitives/Text";
 import { Icon, IconName } from "./Icon";
-import { Text } from "./Text";
 
 export type PillProps = {
   label: string;
@@ -9,6 +9,7 @@ export type PillProps = {
   active: boolean;
   onPress?: PressableProps["onPress"];
   testID?: PressableProps["testID"];
+  className?: string;
 };
 
 /**
@@ -17,25 +18,36 @@ export type PillProps = {
  */
 export const PILL_HEIGHT = 16 + 16 + 4;
 
-export function Pill({ label, iconName, active, onPress, testID }: PillProps) {
+export function Pill({
+  label,
+  iconName,
+  active,
+  onPress,
+  testID,
+  className,
+}: PillProps) {
   return (
-    <Pressable testID={testID} onPress={onPress}>
-      <Box {...boxStyle} backgroundColor={active ? "gray1" : "transparent"}>
-        <Icon name={iconName} size={16} color={active ? "primary" : "gray2"} />
-        <Text ml="s4" variant="text12">
-          {label}
-        </Text>
-      </Box>
+    <Pressable
+      testID={testID}
+      accessibilityRole="button"
+      accessibilityState={{ selected: active }}
+      // Reaches the 44 pt target without changing PILL_HEIGHT
+      hitSlop={4}
+      onPress={onPress}
+      className={cn(
+        "flex-row items-center rounded-full border-2 border-border px-3 py-2",
+        active ? "bg-surface" : "bg-transparent",
+        className,
+      )}
+    >
+      <Icon
+        name={iconName}
+        size={16}
+        className={active ? "text-primary" : "text-muted"}
+      />
+      <Text variant="caption" className="ml-1">
+        {label}
+      </Text>
     </Pressable>
   );
 }
-
-const boxStyle: BoxProps = {
-  flexDirection: "row",
-  alignItems: "center",
-  borderWidth: 2,
-  borderRadius: "rounded",
-  borderColor: "gray1",
-  paddingVertical: "s8",
-  paddingHorizontal: "s12",
-};

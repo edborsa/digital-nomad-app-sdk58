@@ -49,8 +49,8 @@ export function BottomSheet({
 
   return (
     <>
-      <Animated.View style={[styles.backdrop, backdropAnimatedStyle]}>
-        <TouchableOpacity style={{ flex: 1 }} onPress={onPress} />
+      <Animated.View style={[StyleSheet.absoluteFill, backdropAnimatedStyle]}>
+        <TouchableOpacity className="flex-1 bg-black/70" onPress={onPress} />
       </Animated.View>
 
       <Animated.View
@@ -70,9 +70,5 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: "100%",
     bottom: 0,
-  },
-  backdrop: {
-    ...StyleSheet.absoluteFill,
-    backgroundColor: "rgba(0,0,0,0.7)",
   },
 });

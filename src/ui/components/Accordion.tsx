@@ -1,41 +1,43 @@
+import { useState } from "react";
 import { Pressable, StyleSheet, View } from "react-native";
 import Animated, {
   interpolate,
-  interpolateColor,
   SharedValue,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
 } from "react-native-reanimated";
-import theme from "../theme/theme";
-import { useAppTheme } from "../theme/useAppTheme";
-import { Box } from "./Box";
-import { Text } from "./Text";
+import { cn } from "../primitives/cn";
+import { Text } from "../primitives/Text";
+import { Icon } from "./Icon";
 
 type AccordionProps = {
   title: string;
   description: string;
+  className?: string;
 };
 
-export function Accordion({ title, description }: AccordionProps) {
-  const isOpen = useSharedValue(false);
+export function Accordion({ title, description, className }: AccordionProps) {
+  const [isOpen, setIsOpen] = useState(false);
   const progress = useSharedValue(0); // 0 => 1
 
   function handleOpenPress() {
-    isOpen.set(!isOpen.get());
-    progress.set(withTiming(isOpen.get() ? 0 : 1, { duration: 600 }));
+    progress.set(withTiming(isOpen ? 0 : 1, { duration: 600 }));
+    setIsOpen(!isOpen);
   }
 
   return (
-    <Pressable onPress={handleOpenPress}>
-      <View>
-        <AccordionHeader title={title} progress={progress} />
-        <AccordionBody
-          description={description}
-          isOpen={isOpen}
-          progress={progress}
-        />
-      </View>
+    <Pressable
+      accessibilityRole="button"
+      accessibilityState={{ expanded: isOpen }}
+      onPress={handleOpenPress}
+      className={cn(
+        "overflow-hidden rounded-2xl border-2 border-surface",
+        className,
+      )}
+    >
+      <AccordionHeader title={title} progress={progress} />
+      <AccordionBody description={description} progress={progress} />
     </Pressable>
   );
 }
@@ -47,86 +49,61 @@ function AccordionHeader({
   title: string;
   progress: SharedValue<number>;
 }) {
-  const { colors, borderRadii } = useAppTheme();
+  const openAnimatedStyle = useAnimatedStyle(() => ({
+    opacity: progress.value,
+  }));
 
-  const iconAnimatedStyle = useAnimatedStyle(() => ({
-    tintColor: interpolateColor(
-      progress.value,
-      [0, 1],
-      [colors.gray2, colors.primary],
-    ),
+  const closedAnimatedStyle = useAnimatedStyle(() => ({
+    opacity: 1 - progress.value,
+  }));
+
+  const chevronAnimatedStyle = useAnimatedStyle(() => ({
     transform: [
-      {
-        rotate: interpolate(progress.value, [0, 1], [0, -180]) + "deg",
-      },
+      { rotate: interpolate(progress.value, [0, 1], [0, -180]) + "deg" },
     ],
   }));
 
-  const animatedStyle = useAnimatedStyle(() => ({
-    backgroundColor: interpolateColor(
-      progress.value,
-      [0, 1],
-      [colors.transparent, colors.gray1],
-    ),
-    borderBottomLeftRadius: interpolate(
-      progress.value,
-      [0, 1],
-      [borderRadii.default, 0],
-    ),
-    borderBottomRightRadius: interpolate(
-      progress.value,
-      [0, 1],
-      [borderRadii.default, 0],
-    ),
-  }));
-
   return (
-    <Animated.View style={[styles.header, animatedStyle]}>
-      <Box flexShrink={1}>
-        <Text variant="title16">{title}</Text>
-      </Box>
+    <View className="flex-row items-center justify-between p-4">
+      <Animated.View style={[StyleSheet.absoluteFill, openAnimatedStyle]}>
+        <View className="flex-1 bg-surface" />
+      </Animated.View>
+      <View className="shrink">
+        <Text variant="heading">{title}</Text>
+      </View>
 
-      <Animated.Image
-        source={require("@/assets/images/chevron-down.png")}
-        style={[iconAnimatedStyle, { width: 24, height: 24 }]}
-      />
-    </Animated.View>
+      <Animated.View style={chevronAnimatedStyle}>
+        <Animated.View style={closedAnimatedStyle}>
+          <Icon name="Chevron-down" className="text-muted" />
+        </Animated.View>
+        <Animated.View style={[styles.overlay, openAnimatedStyle]}>
+          <Icon name="Chevron-down" className="text-primary" />
+        </Animated.View>
+      </Animated.View>
+    </View>
   );
 }
 
 function AccordionBody({
   description,
-  isOpen,
   progress,
 }: {
   description: string;
-  isOpen: SharedValue<boolean>;
   progress: SharedValue<number>;
 }) {
-  const { borderRadii } = useAppTheme();
   const height = useSharedValue(0);
 
   const animatedStyle = useAnimatedStyle(() => {
     return {
       opacity: interpolate(progress.value, [0, 1], [0, 1]),
       height: interpolate(progress.value, [0, 1], [0, height.value]),
-      borderTopLeftRadius: interpolate(
-        progress.value,
-        [0, 1],
-        [borderRadii.default, 0],
-      ),
-      borderTopRightRadius: interpolate(
-        progress.value,
-        [0, 1],
-        [borderRadii.default, 0],
-      ),
     };
   });
 
   return (
-    <Animated.View style={[animatedStyle, { overflow: "hidden" }]}>
+    <Animated.View style={[styles.body, animatedStyle]}>
       <View
-        style={styles.body}
+        className="absolute w-full bg-surface px-4 pb-4"
         onLayout={(e) => {
           height.set(e.nativeEvent.layout.height);
         }}
@@ -138,21 +115,6 @@ function AccordionBody({
 }
 
 const styles = StyleSheet.create({
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: 16,
-    borderWidth: 2,
-    borderColor: theme.colors.gray1,
-    borderRadius: theme.borderRadii.default,
-  },
-  body: {
-    position: "absolute",
-    paddingHorizontal: 16,
-    paddingBottom: 16,
-    backgroundColor: theme.colors.gray1,
-    borderBottomLeftRadius: theme.borderRadii.default,
-    borderBottomRightRadius: theme.borderRadii.default,
-  },
+  overlay: { position: "absolute" },
+  body: { overflow: "hidden" },
 });

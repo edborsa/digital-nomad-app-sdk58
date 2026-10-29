@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { TextInput, TextInputProps } from "react-native";
-import { useAppTheme } from "../theme/useAppTheme";
-import { Box, BoxProps } from "./Box";
+import { TextInput, TextInputProps, View } from "react-native";
+import { cn } from "../primitives/cn";
 import { IconButton } from "./IconButton";
 
-type SearchInputProps = {} & Pick<
+type SearchInputProps = { className?: string } & Pick<
   TextInputProps,
   "value" | "onChangeText" | "placeholder"
 >;
@@ -12,8 +11,8 @@ export function SearchInput({
   value,
   onChangeText,
   placeholder,
+  className,
 }: SearchInputProps) {
-  const { colors, textVariants } = useAppTheme();
   const [isFocused, setIsFocused] = useState(false);
 
   function onPressIconButton() {
@@ -23,43 +22,27 @@ export function SearchInput({
   }
 
   return (
-    <Box
-      {...boxStyle}
-      style={{ borderColor: isFocused ? colors.primary : colors.gray1 }}
+    <View
+      className={cn(
+        "h-[70px] flex-row items-center justify-between rounded-full border-2 bg-surface p-2 pl-4",
+        isFocused ? "border-primary" : "border-surface",
+        className,
+      )}
     >
       <TextInput
         testID="search-input"
         value={value}
         onChangeText={onChangeText}
         placeholder={placeholder}
-        placeholderTextColor={colors.text}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
-        style={{
-          ...textVariants.title16,
-          color: colors.text,
-          //   backgroundColor: "green",
-          height: "100%",
-          width: "100%",
-          flexShrink: 1,
-        }}
+        className="h-full w-full shrink font-poppins-semibold text-heading text-foreground placeholder:text-foreground"
       />
       <IconButton
         iconName={value!.length > 0 ? "Close" : "Search-outline"}
+        accessibilityLabel={value!.length > 0 ? "Limpar busca" : "Buscar"}
         onPress={onPressIconButton}
       />
-    </Box>
+    </View>
   );
 }
-
-const boxStyle: BoxProps = {
-  flexDirection: "row",
-  alignItems: "center",
-  padding: "s8",
-  justifyContent: "space-between",
-  backgroundColor: "gray1",
-  paddingLeft: "s16",
-  height: 70,
-  borderRadius: "rounded",
-  borderWidth: 2,
-};

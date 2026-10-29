@@ -27,6 +27,17 @@ describe("integration: Home", () => {
     expect(screen.getByText("Espanha")).toBeOnTheScreen();
   });
 
+  it("should mark the category pill as selected when filtering by it", async () => {
+    await renderApp({ isAuthenticated: true });
+
+    const beachPill = await screen.findByTestId("category-pill-beach");
+    expect(beachPill).not.toBeSelected();
+
+    await fireEvent.press(beachPill);
+
+    expect(screen.getByTestId("category-pill-beach")).toBeSelected();
+  });
+
   it("should display an error message when city list does not load", async () => {
     await renderApp({
       isAuthenticated: true,

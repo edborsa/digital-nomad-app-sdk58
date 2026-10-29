@@ -32,7 +32,11 @@ export function BottomSheetMap({
         }}
       />
       <Box position="absolute" top={spacing.padding} right={spacing.padding}>
-        <IconButton iconName="Close" onPress={bottomSheetProps.onPress} />
+        <IconButton
+          iconName="Close"
+          accessibilityLabel="Fechar mapa"
+          onPress={bottomSheetProps.onPress}
+        />
       </Box>
     </BottomSheet>
   );

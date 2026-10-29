@@ -1,28 +1,26 @@
-import { Pressable, StyleSheet, useWindowDimensions } from "react-native";
+import { Pressable, useWindowDimensions, View } from "react-native";
 
 import { Image } from "expo-image";
 import { Link } from "expo-router";
-import { useAppTheme } from "../theme/useAppTheme";
 
 import { CityPreview } from "@/src/domain/city/City";
+import { Text } from "../primitives/Text";
 import { BlackOpacity } from "./BlackOpacity";
-import { Box } from "./Box";
 import { CityFavoriteButton } from "./CityFavoriteButton";
-import { Text } from "./Text";
 
 type CityCardProps = {
   cityPreview: CityPreview;
   type?: "small" | "large";
   disableFavorite?: boolean;
+  className?: string;
 };
 
 export function CityCard({
   cityPreview,
   type = "large",
   disableFavorite = false,
+  className,
 }: CityCardProps) {
-  const { borderRadii } = useAppTheme();
-
   const { width } = useWindowDimensions();
 
   const cardWith = width * 0.7;
@@ -33,30 +31,32 @@ export function CityCard({
 
   return (
     <Link push href={`/city-details/${cityPreview.id}`} asChild>
-      <Pressable testID={`city-card-${cityPreview.id}`}>
-        <Box width="100%" height={280} style={style}>
+      <Pressable testID={`city-card-${cityPreview.id}`} className={className}>
+        <View
+          className="h-[280px] w-full overflow-hidden rounded-2xl"
+          style={style}
+        >
           <Image
             source={cityPreview.coverImage}
-            style={[
-              StyleSheet.absoluteFill,
-              { borderRadius: borderRadii.default },
-            ]}
+            className="absolute inset-0"
             transition={300}
           />
           <BlackOpacity />
-          <Box flex={1} padding="s24" justifyContent="space-between">
-            {
-              <Box alignSelf="flex-end">
-                {!disableFavorite && <CityFavoriteButton city={cityPreview} />}
-              </Box>
-            }
+          <View className="flex-1 justify-between p-6">
+            <View className="self-end">
+              {!disableFavorite && (
+                <CityFavoriteButton city={cityPreview} onImage />
+              )}
+            </View>
 
-            <Box>
-              <Text variant="title22">{cityPreview.name}</Text>
-              <Text variant="text16">{cityPreview.country}</Text>
-            </Box>
-          </Box>
-        </Box>
+            <View>
+              <Text variant="title" className="text-white">
+                {cityPreview.name}
+              </Text>
+              <Text className="text-white">{cityPreview.country}</Text>
+            </View>
+          </View>
+        </View>
       </Pressable>
     </Link>
   );

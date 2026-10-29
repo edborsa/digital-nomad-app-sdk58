@@ -54,17 +54,17 @@ export default function CityDetails() {
             country={city.country}
             description={city.description}
           />
-          <Divider paddingHorizontal="padding" />
+          <Divider className="px-4" />
           <CityDetailsTouristAttractions
             touristAttractions={city.touristAttractions}
           />
 
-          <Divider paddingHorizontal="padding" />
+          <Divider className="px-4" />
           <Pressable onPress={toggleBottomSheet}>
             <CityDetailsMap location={city.location} />
           </Pressable>
 
-          <Divider paddingHorizontal="padding" />
+          <Divider className="px-4" />
           <CityDetailsRelatedCities id={city.id} />
         </Animated.View>
       </Screen>

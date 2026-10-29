@@ -2,7 +2,7 @@ import { AuthUser } from "@/src/domain/auth/AuthUser";
 import { dateUtils } from "@/src/utils/dateUtils";
 import { router } from "expo-router";
 import { Box } from "../../components/Box";
-import { Button } from "../../components/Button";
+import { Button } from "../../primitives/Button";
 import { Text } from "../../components/Text";
 
 type ProfileHeaderProps = {
