@@ -80,4 +80,62 @@ describe("integration: Profile", () => {
     expect(await screen.findByText(/Informações da Conta/i)).toBeOnTheScreen();
     expect(screen.queryByText("Atualizar Senha")).not.toBeOnTheScreen();
   });
+
+  it("should show an error and stay on the form when updating the profile fails", async () => {
+    await renderApp({
+      initialSession: "signedIn",
+      repositories: {
+        auth: {
+          getUser: () => mockedAuthUser,
+          updateProfile: () => Promise.reject(new Error("server is down!")),
+        },
+      },
+    });
+
+    await fireEvent.press(await screen.findByText("Perfil"));
+    await fireEvent.press(await screen.findByText(/editar perfil/i));
+    await fireEvent.changeText(
+      await screen.findByTestId("fullname-input"),
+      "Lucas Coffstack",
+    );
+    await fireEvent.press(screen.getByTestId("submit-button"));
+
+    expect(
+      await screen.findByText("erro ao atualizar perfil"),
+    ).toBeOnTheScreen();
+    expect(screen.getByTestId("fullname-input")).toBeOnTheScreen();
+  });
+
+  it("should show an error and stay on the form when updating the password fails", async () => {
+    await renderApp({
+      initialSession: "signedIn",
+      repositories: {
+        auth: {
+          getUser: () => mockedAuthUser,
+          updatePassword: () => Promise.reject(new Error("wrong password")),
+        },
+      },
+    });
+
+    await fireEvent.press(await screen.findByText("Perfil"));
+    await fireEvent.press(await screen.findByText(/alterar senha/i));
+    await fireEvent.changeText(
+      await screen.findByTestId("current-password-input"),
+      "12345678",
+    );
+    await fireEvent.changeText(
+      screen.getByTestId("new-password-input"),
+      "87654321",
+    );
+    await fireEvent.changeText(
+      screen.getByTestId("confirm-new-password-input"),
+      "87654321",
+    );
+    await fireEvent.press(screen.getByTestId("submit-button"));
+
+    expect(
+      await screen.findByText("erro ao atualizar senha"),
+    ).toBeOnTheScreen();
+    expect(screen.getByText("Atualizar Senha")).toBeOnTheScreen();
+  });
 });

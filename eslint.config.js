@@ -7,6 +7,12 @@ module.exports = defineConfig([
   expoConfig,
   prettierConfig,
   {
+    files: ["**/*.ts", "**/*.tsx"],
+    rules: {
+      "@typescript-eslint/no-explicit-any": "error",
+    },
+  },
+  {
     ignores: [
       "dist/*",
       ".expo/*",

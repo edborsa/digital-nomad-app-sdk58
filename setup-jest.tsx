@@ -1,7 +1,7 @@
 jest.mock("@expo/vector-icons/createIconSetFromIcoMoon", () => {
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   const { View } = require("react-native");
-  function FakeIcon(props: any) {
+  function FakeIcon(props: { name: string }) {
     return <View testID={props.name} />;
   }
 

@@ -29,6 +29,7 @@ export default function ResetPasswordScreen() {
           instruções para redefinir sua senha
         </Text>
         <TextInput
+          testID="email-input"
           label="E-mail"
           autoCapitalize="none"
           value={email}

@@ -6,6 +6,7 @@ import ProtectedLayout from "@/app/(protected)/_layout";
 import CityDetails from "@/app/(protected)/city-details/[id]";
 import NotFoundScreen from "@/app/+not-found";
 import SignInScreen from "@/app/sign-in";
+import ResetPasswordScreen from "@/app/reset-password";
 import SignUpScreen from "@/app/sign-up";
 import { renderRouter } from "expo-router/testing-library";
 import { AppStack } from "../ui/navigation/AppStack";
@@ -31,6 +32,9 @@ type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
 };
 
+// Lucas Garcez, the first seeded AuthUser, is who a signed-in render belongs to
+const [defaultAuthUser] = authUsers;
+
 export function renderApp(options?: {
   /** Applied to the Session store; when left out, the Session is whatever was restored */
   initialSession?: Exclude<SessionStatus, "restoring">;
@@ -44,7 +48,7 @@ export function renderApp(options?: {
   const client = new QueryClient(queryClientOptions);
 
   if (options?.initialSession === "signedIn") {
-    useSessionStore.getState().signIn(issueFakeJwt(authUsers[0].id));
+    useSessionStore.getState().signIn(issueFakeJwt(defaultAuthUser.id));
   } else if (options?.initialSession === "signedOut") {
     useSessionStore.getState().signOut();
   }
@@ -75,6 +79,7 @@ export function renderApp(options?: {
       "(protected)/update-password": () => <UpdatePasswordScreen />,
       "sign-in": () => <SignInScreen />,
       "sign-up": () => <SignUpScreen />,
+      "reset-password": () => <ResetPasswordScreen />,
       "+not-found": () => <NotFoundScreen />,
     },
     { wrapper: Wrapper, initialUrl: "/" },

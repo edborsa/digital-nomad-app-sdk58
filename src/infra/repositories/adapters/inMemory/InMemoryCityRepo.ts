@@ -9,10 +9,10 @@ import { cities } from "@/src/infra/repositories/adapters/inMemory/data/cities";
 
 export class InMemoryCityRepo implements ICityRepo {
   async findGroupedByCategory(): Promise<CitiesGroupedByCategory[]> {
-    return cities.map((city) => ({
-      category: city.categories[0],
-      cities: [city],
-    }));
+    return cities.flatMap((city) => {
+      const [category] = city.categories;
+      return category ? [{ category, cities: [city] }] : [];
+    });
   }
   async toggleFavorite(params: CityToggleFavoriteParams): Promise<void> {
     const city = cities.find((city) => city.id === params.cityId);

@@ -1,6 +1,7 @@
 import { AuthUser } from "@/src/domain/auth/AuthUser";
 
-export const authUsers: AuthUser[] = [
+// Never empty: tests sign in as the first one
+export const authUsers: [AuthUser, ...AuthUser[]] = [
   {
     id: "1",
     email: "lucas@coffstack.com",

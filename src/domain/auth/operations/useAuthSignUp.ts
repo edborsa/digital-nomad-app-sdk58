@@ -21,7 +21,7 @@ export function useAuthSignUp(options?: UseAppMutationOptions<void>) {
     },
     onError: (error) => {
       options?.onError?.(error);
-      feedbackService.send({ type: "error", message: "erro ao cadastras" });
+      feedbackService.send({ type: "error", message: "erro ao cadastrar" });
     },
   });
 }

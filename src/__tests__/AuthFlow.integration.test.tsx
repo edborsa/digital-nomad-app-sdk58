@@ -84,4 +84,50 @@ describe("integration: Auth Flow", () => {
     expect(await screen.findByText("Bem-vindo")).toBeOnTheScreen();
     expect(screen.queryByTestId("fullname-input")).not.toBeOnTheScreen();
   });
+
+  test("signing up with an email that is already in use shows an error", async () => {
+    await renderApp();
+
+    await fireEvent.press(await screen.findByTestId("sign-up-link"));
+    await fireEvent.changeText(
+      await screen.findByTestId("fullname-input"),
+      "Lucas Garcez",
+    );
+    await fireEvent.changeText(
+      screen.getByTestId("email-input"),
+      "lucas@coffstack.com",
+    );
+    await fireEvent.changeText(
+      screen.getByTestId("password-input"),
+      "12345678",
+    );
+    await fireEvent.changeText(
+      screen.getByTestId("confirm-password-input"),
+      "12345678",
+    );
+    await fireEvent.press(screen.getByTestId("submit-button"));
+
+    expect(await screen.findByText("erro ao cadastrar")).toBeOnTheScreen();
+    expect(screen.getByTestId("fullname-input")).toBeOnTheScreen();
+  });
+
+  test("a learner can ask for a password reset email and returns to sign-in", async () => {
+    const sendResetPasswordEmail = jest.fn(async () => {});
+    await renderApp({ repositories: { auth: { sendResetPasswordEmail } } });
+
+    await fireEvent.press(await screen.findByText("Esqueceu sua senha"));
+    expect(await screen.findByText("Recuperar Senha")).toBeOnTheScreen();
+
+    await fireEvent.changeText(
+      screen.getByTestId("email-input"),
+      "lucas@coffstack.com",
+    );
+    await fireEvent.press(screen.getByText("Enviar link"));
+
+    expect(
+      await screen.findByText("verifique sua caixa de e-mail"),
+    ).toBeOnTheScreen();
+    expect(sendResetPasswordEmail).toHaveBeenCalledWith("lucas@coffstack.com");
+    expect(await screen.findByText("Bem-vindo")).toBeOnTheScreen();
+  });
 });
