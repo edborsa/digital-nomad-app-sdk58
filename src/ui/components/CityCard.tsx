@@ -1,5 +1,6 @@
-import { ImageBackground, Pressable, useWindowDimensions } from "react-native";
+import { Pressable, StyleSheet, useWindowDimensions } from "react-native";
 
+import { Image } from "expo-image";
 import { Link } from "expo-router";
 import { useAppTheme } from "../theme/useAppTheme";
 
@@ -33,15 +34,15 @@ export function CityCard({
   return (
     <Link push href={`/city-details/${cityPreview.id}`} asChild>
       <Pressable testID={`city-card-${cityPreview.id}`}>
-        <ImageBackground
-          source={
-            typeof cityPreview.coverImage === "number"
-              ? cityPreview.coverImage
-              : { uri: cityPreview.coverImage }
-          }
-          style={[{ width: "100%", height: 280 }, style]}
-          imageStyle={{ borderRadius: borderRadii.default }}
-        >
+        <Box width="100%" height={280} style={style}>
+          <Image
+            source={cityPreview.coverImage}
+            style={[
+              StyleSheet.absoluteFill,
+              { borderRadius: borderRadii.default },
+            ]}
+            transition={300}
+          />
           <BlackOpacity />
           <Box flex={1} padding="s24" justifyContent="space-between">
             {
@@ -55,7 +56,7 @@ export function CityCard({
               <Text variant="text16">{cityPreview.country}</Text>
             </Box>
           </Box>
-        </ImageBackground>
+        </Box>
       </Pressable>
     </Link>
   );

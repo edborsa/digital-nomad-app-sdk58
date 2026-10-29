@@ -1,5 +1,6 @@
+import { Image } from "expo-image";
 import { router } from "expo-router";
-import { ImageBackground, ScrollView } from "react-native";
+import { ScrollView, StyleSheet } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { City } from "@/src/domain/city/City";
@@ -24,13 +25,12 @@ export function CityDetailsHeader({
   const { top } = useSafeAreaInsets();
   return (
     <Box>
-      <ImageBackground
-        source={
-          typeof coverImage === "number" ? coverImage : { uri: coverImage }
-        }
-        style={{ width: "100%", height: 250 }}
-        imageStyle={{ borderBottomRightRadius: 40 }}
-      >
+      <Box width="100%" height={250}>
+        <Image
+          source={coverImage}
+          style={[StyleSheet.absoluteFill, { borderBottomRightRadius: 40 }]}
+          transition={300}
+        />
         <BlackOpacity />
         <Box
           flexDirection="row"
@@ -46,7 +46,7 @@ export function CityDetailsHeader({
           />
           <CityFavoriteButton size={30} city={{ id, isFavorite }} />
         </Box>
-      </ImageBackground>
+      </Box>
 
       <ScrollView
         horizontal
