@@ -1,0 +1,37 @@
+# A small fixture in the shape of the Ash backend's schema, until the backend
+# commits its own SDL file here. Ash mutations return { result, errors }.
+
+scalar Json
+
+type Query {
+  city(id: ID!): City
+}
+
+type Mutation {
+  toggleFavoriteCity(input: ToggleFavoriteCityInput!): ToggleFavoriteCityResult
+}
+
+type City {
+  id: ID!
+  name: String!
+  country: String!
+  isFavorite: Boolean!
+}
+
+input ToggleFavoriteCityInput {
+  cityId: ID!
+}
+
+type ToggleFavoriteCityResult {
+  result: City
+  errors: [MutationError!]!
+}
+
+type MutationError {
+  message: String
+  shortMessage: String
+  vars: Json
+  code: String
+  fields: [String!]
+  path: [String!]
+}

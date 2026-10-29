@@ -7,6 +7,7 @@ dist/
 android/
 ios/
 .expo/
+src/infra/graphql/generated/
 
 # Agent and tracker files (beads manages blocks in these files by hash)
 AGENTS.md
