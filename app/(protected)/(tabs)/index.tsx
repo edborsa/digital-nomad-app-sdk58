@@ -1,24 +1,21 @@
 import { useCategoryFindAll } from "@/src/domain/category/operations/useCategoryFindAll";
 import { CityPreview } from "@/src/domain/city/City";
-import { Box } from "@/src/ui/components/Box";
 import { CityCard } from "@/src/ui/components/CityCard";
 import { Screen } from "@/src/ui/components/Screen";
 import { CityFilter } from "@/src/ui/containers/CityFilter";
 
 import { useCityFindAll } from "@/src/domain/city/operations/useCityFindAll";
-import { useAppTheme } from "@/src/ui/theme/useAppTheme";
 import { useDebounce } from "@/src/utils/hooks/useDebounce";
 
-import { Text } from "@/src/ui/components/Text";
+import { Text } from "@/src/ui/primitives/Text";
 import { errorUtils } from "@/src/utils/errorUtils";
 import { useScrollToTop } from "expo-router";
 import { useRef, useState } from "react";
-import { ListRenderItemInfo } from "react-native";
+import { ListRenderItemInfo, View } from "react-native";
 import Animated, { FadingTransition } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
-  const { spacing } = useAppTheme();
   const { top } = useSafeAreaInsets();
   const [cityName, setCityName] = useState("");
 
@@ -43,9 +40,9 @@ export default function HomeScreen() {
 
   function renderItem({ item }: ListRenderItemInfo<CityPreview>) {
     return (
-      <Box paddingHorizontal="padding">
+      <View className="px-4">
         <CityCard cityPreview={item} />
-      </Box>
+      </View>
     );
   }
 
@@ -64,11 +61,7 @@ export default function HomeScreen() {
       Content = <Text>não há cidades no momento</Text>;
     }
 
-    return (
-      <Box alignSelf="center" mt="s32">
-        {Content}
-      </Box>
-    );
+    return <View className="mt-8 self-center">{Content}</View>;
   }
 
   return (
@@ -76,11 +69,8 @@ export default function HomeScreen() {
       <Animated.FlatList
         itemLayoutAnimation={FadingTransition.duration(500)}
         ref={flatListRef}
-        contentContainerStyle={{
-          gap: spacing.padding,
-          paddingTop: top,
-          paddingBottom: spacing.padding,
-        }}
+        // Reanimated's FlatList skips NativeWind, so its container keeps plain styles
+        contentContainerStyle={{ gap: 16, paddingTop: top, paddingBottom: 16 }}
         data={cities}
         renderItem={renderItem}
         showsVerticalScrollIndicator={false}

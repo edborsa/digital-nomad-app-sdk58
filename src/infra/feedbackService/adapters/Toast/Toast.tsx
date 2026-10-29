@@ -1,49 +1,30 @@
-import { Box } from "@/src/ui/components/Box";
-import { Text } from "@/src/ui/components/Text";
-import { ThemeColors } from "@/src/ui/theme/theme";
+import { cn } from "@/src/ui/primitives/cn";
+import { Text } from "@/src/ui/primitives/Text";
+import { View } from "react-native";
 import RNToast, { ToastConfig } from "react-native-toast-message";
 import { Feedback, FeedbackType } from "../../IFeedbackService";
 
-const toastColors: Record<
+const toastClassNames: Record<
   FeedbackType,
-  { backgroundColor: ThemeColors; textColor: ThemeColors }
+  { container: string; text: string }
 > = {
-  error: {
-    backgroundColor: "fbErrorBg",
-    textColor: "fbErrorSurface",
-  },
-  success: {
-    backgroundColor: "fbSuccessBg",
-    textColor: "fbSuccessSurface",
-  },
-  warning: {
-    backgroundColor: "fbWarningBg",
-    textColor: "fbWarningSurface",
-  },
-  info: {
-    backgroundColor: "fbInfoBg",
-    textColor: "fbInfoSurface",
-  },
+  error: { container: "bg-error-muted", text: "text-error" },
+  success: { container: "bg-success-muted", text: "text-success" },
+  warning: { container: "bg-warning-muted", text: "text-warning" },
+  info: { container: "bg-info-muted", text: "text-info" },
 };
 
 function CustomToast({ type, description, message }: Feedback) {
-  const { backgroundColor, textColor } = toastColors[type ?? "success"];
+  const { container, text } = toastClassNames[type ?? "success"];
   return (
-    <Box
-      backgroundColor={backgroundColor}
-      paddingHorizontal="s24"
-      paddingVertical="s12"
-      borderRadius="default"
-    >
-      <Text color={textColor} variant="title16">
+    <View className={cn("rounded-2xl px-6 py-3", container)}>
+      <Text variant="heading" className={text}>
         {message}
       </Text>
       {description && (
-        <Text color={textColor} mt="s4" textAlign="center">
-          {description}
-        </Text>
+        <Text className={cn("mt-1 text-center", text)}>{description}</Text>
       )}
-    </Box>
+    </View>
   );
 }
 

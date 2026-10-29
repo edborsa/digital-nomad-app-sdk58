@@ -1,11 +1,9 @@
 import { Stack } from "expo-router";
-import theme from "../theme/theme";
 
 export function AppStack() {
   return (
     <Stack
       screenOptions={{
-        contentStyle: { backgroundColor: theme.colors.background },
         headerShown: false,
         fullScreenGestureEnabled: true,
       }}

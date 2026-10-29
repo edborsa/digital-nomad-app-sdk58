@@ -1,27 +1,23 @@
 import { Icon } from "@/src/ui/components/Icon";
-import { useAppTheme } from "@/src/ui/theme/useAppTheme";
+import { Text } from "@/src/ui/primitives/Text";
 import { Tabs } from "expo-router";
 import React from "react";
+import { View } from "react-native";
 
 export default function TabLayout() {
-  const { colors } = useAppTheme();
   return (
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: colors.primary,
-        tabBarInactiveTintColor: colors.gray2,
         tabBarStyle: {
-          backgroundColor: colors.background,
           paddingTop: 10,
           height: 90,
           borderTopWidth: 0,
         },
-        tabBarLabelStyle: {
-          fontFamily: "PoppinsRegular",
-          fontSize: 12,
-          color: colors.text,
-        },
+        tabBarBackground: () => <View className="flex-1 bg-background" />,
+        tabBarLabel: ({ children }) => (
+          <Text variant="caption">{children}</Text>
+        ),
       }}
     >
       <Tabs.Screen

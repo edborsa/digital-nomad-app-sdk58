@@ -1,9 +1,9 @@
 import { useAuthUpdateProfile } from "@/src/domain/auth/operations/useAuthUpdateProfile";
 import { Screen } from "@/src/ui/components/Screen";
-import { Text } from "@/src/ui/components/Text";
 import { Header } from "@/src/ui/containers/Header";
 import { UpdateProfileForm } from "@/src/ui/containers/UpdateProfileForm/UpdateProfileForm";
 import { UpdateProfileSchema } from "@/src/ui/containers/UpdateProfileForm/UpdateProfileSchema";
+import { Text } from "@/src/ui/primitives/Text";
 import { router, useLocalSearchParams } from "expo-router";
 
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -31,7 +31,7 @@ export default function UpdateProfileScreen() {
     <Screen scrollable>
       <SafeAreaView>
         <Header title="Atualizar Perfil" />
-        <Text mb="s16">
+        <Text className="mb-4">
           Mantenha suas informações atualizadas para uma melhor experiência
         </Text>
         <UpdateProfileForm

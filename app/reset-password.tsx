@@ -1,7 +1,7 @@
 import { useAuthSendResetPasswordEmail } from "@/src/domain/auth/operations/useAuthSendResetPasswordEmail";
 import { Button } from "@/src/ui/primitives/Button";
 import { Screen } from "@/src/ui/components/Screen";
-import { Text } from "@/src/ui/components/Text";
+import { Text } from "@/src/ui/primitives/Text";
 import { TextInput } from "@/src/ui/components/TextInput";
 import { Header } from "@/src/ui/containers/Header";
 import { Logo } from "@/src/ui/containers/Logo";
@@ -24,7 +24,7 @@ export default function ResetPasswordScreen() {
     <Screen>
       <SafeAreaView>
         <Header title="Recuperar Senha" />
-        <Text mb="s16">
+        <Text className="mb-4">
           Digite o endereço de e-mail associado à sua conta e enviaremos
           instruções para redefinir sua senha
         </Text>

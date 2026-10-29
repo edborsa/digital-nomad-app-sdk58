@@ -1,25 +1,20 @@
 import { router } from "expo-router";
-import { Box } from "../components/Box";
+import { View } from "react-native";
 import { IconButton } from "../components/IconButton";
-import { Text } from "../components/Text";
+import { Text } from "../primitives/Text";
 
 type HeaderProps = {
   title: string;
 };
 export function Header({ title }: HeaderProps) {
   return (
-    <Box
-      flexDirection="row"
-      justifyContent="space-between"
-      alignItems="center"
-      mb="s56"
-    >
+    <View className="mb-14 flex-row items-center justify-between">
       <IconButton
         iconName="Chevron-left"
         accessibilityLabel="Voltar"
         onPress={() => router.back()}
       />
-      <Text variant="title16">{title}</Text>
-    </Box>
+      <Text variant="heading">{title}</Text>
+    </View>
   );
 }

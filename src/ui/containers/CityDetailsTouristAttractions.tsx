@@ -1,16 +1,16 @@
 import { City } from "@/src/domain/city/City";
+import { View } from "react-native";
 import { Accordion } from "../components/Accordion";
-import { Box } from "../components/Box";
-import { Text } from "../components/Text";
+import { Text } from "../primitives/Text";
 
 type Props = Pick<City, "touristAttractions">;
 export function CityDetailsTouristAttractions({ touristAttractions }: Props) {
   return (
-    <Box padding="padding">
-      <Text variant="title22" mb="s8">
+    <View className="p-4">
+      <Text variant="title" className="mb-2">
         Pontos turísticos
       </Text>
-      <Box gap="s8">
+      <View className="gap-2">
         {touristAttractions.map((attraction) => (
           <Accordion
             key={attraction.id}
@@ -18,7 +18,7 @@ export function CityDetailsTouristAttractions({ touristAttractions }: Props) {
             description={attraction.description}
           />
         ))}
-      </Box>
-    </Box>
+      </View>
+    </View>
   );
 }

@@ -45,4 +45,39 @@ describe("integration: Profile", () => {
 
     expect(await screen.findByText(/Informações da Conta/i)).toBeOnTheScreen();
   });
+
+  it("should update the password and return to the profile", async () => {
+    await renderApp({
+      isAuthenticated: true,
+      repositories: {
+        auth: {
+          getUser: () => mockedAuthUser,
+        },
+      },
+    });
+
+    await fireEvent.press(await screen.findByText("Perfil"));
+    await fireEvent.press(await screen.findByText(/alterar senha/i));
+    expect(await screen.findByText("Atualizar Senha")).toBeOnTheScreen();
+
+    await fireEvent.changeText(
+      screen.getByTestId("current-password-input"),
+      "12345678",
+    );
+    await fireEvent.changeText(
+      screen.getByTestId("new-password-input"),
+      "87654321",
+    );
+    await fireEvent.changeText(
+      screen.getByTestId("confirm-new-password-input"),
+      "87654321",
+    );
+    await fireEvent.press(screen.getByTestId("submit-button"));
+
+    expect(
+      await screen.findByText("senha atualizada com sucesso"),
+    ).toBeOnTheScreen();
+    expect(await screen.findByText(/Informações da Conta/i)).toBeOnTheScreen();
+    expect(screen.queryByText("Atualizar Senha")).not.toBeOnTheScreen();
+  });
 });

@@ -3,7 +3,6 @@ import { useFindAllFavorites } from "@/src/domain/city/operations/useFindAllFavo
 import { FlatList, FlatListProps, ListRenderItemInfo } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { FavoriteCityCard } from "../../components/FavoriteCityCard";
-import { useAppTheme } from "../../theme/useAppTheme";
 
 export function FavoriteCityList({
   ListFooterComponent,
@@ -13,7 +12,6 @@ export function FavoriteCityList({
   "ListFooterComponent" | "ListHeaderComponent"
 >) {
   const { data: favoriteList } = useFindAllFavorites();
-  const { spacing } = useAppTheme();
   const { top } = useSafeAreaInsets();
 
   function renderItem({ item }: ListRenderItemInfo<CityPreview>) {
@@ -28,11 +26,8 @@ export function FavoriteCityList({
       showsVerticalScrollIndicator={false}
       ListHeaderComponent={ListHeaderComponent}
       ListFooterComponent={ListFooterComponent}
-      contentContainerStyle={{
-        gap: spacing.padding,
-        paddingTop: top,
-        paddingBottom: spacing.padding,
-      }}
+      contentContainerClassName="gap-4 pb-4"
+      contentContainerStyle={{ paddingTop: top }}
     />
   );
 }

@@ -1,4 +1,4 @@
-import { Box } from "../../components/Box";
+import { View } from "react-native";
 import { Button } from "../../primitives/Button";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -24,7 +24,7 @@ export function UpdateProfileForm({
   });
 
   return (
-    <Box>
+    <View>
       <Controller
         control={control}
         name="fullname"
@@ -63,6 +63,6 @@ export function UpdateProfileForm({
         title="Atualizar"
         onPress={() => handleSubmit(onSubmit)()}
       />
-    </Box>
+    </View>
   );
 }

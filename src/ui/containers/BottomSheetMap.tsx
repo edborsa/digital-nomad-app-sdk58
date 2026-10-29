@@ -1,11 +1,9 @@
-import { useWindowDimensions } from "react-native";
+import { StyleSheet, useWindowDimensions, View } from "react-native";
 import MapView from "react-native-maps";
 
 import { City } from "@/src/domain/city/City";
 import { BottomSheet, BottomSheetProps } from "../components/BottomSheet";
-import { Box } from "../components/Box";
 import { IconButton } from "../components/IconButton";
-import { useAppTheme } from "../theme/useAppTheme";
 
 type BottomSheetMapProps = Omit<BottomSheetProps, "children"> & {
   location: City["location"];
@@ -15,29 +13,28 @@ export function BottomSheetMap({
   ...bottomSheetProps
 }: BottomSheetMapProps) {
   const { height } = useWindowDimensions();
-  const { borderRadii, spacing } = useAppTheme();
   return (
     <BottomSheet {...bottomSheetProps}>
-      <MapView
-        style={{
-          width: "100%",
-          height: height * 0.7,
-          borderRadius: borderRadii.default,
-        }}
-        initialRegion={{
-          latitude: location.latitude,
-          longitude: location.longitude,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.2,
-        }}
-      />
-      <Box position="absolute" top={spacing.padding} right={spacing.padding}>
-        <IconButton
-          iconName="Close"
-          accessibilityLabel="Fechar mapa"
-          onPress={bottomSheetProps.onPress}
+      <View
+        className="w-full overflow-hidden rounded-2xl"
+        style={{ height: height * 0.7 }}
+      >
+        <MapView
+          style={StyleSheet.absoluteFill}
+          initialRegion={{
+            latitude: location.latitude,
+            longitude: location.longitude,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.2,
+          }}
         />
-      </Box>
+      </View>
+      <IconButton
+        iconName="Close"
+        accessibilityLabel="Fechar mapa"
+        className="absolute right-4 top-4"
+        onPress={bottomSheetProps.onPress}
+      />
     </BottomSheet>
   );
 }

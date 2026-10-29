@@ -1,9 +1,9 @@
 import { AuthUser } from "@/src/domain/auth/AuthUser";
 import { dateUtils } from "@/src/utils/dateUtils";
 import { router } from "expo-router";
-import { Box } from "../../components/Box";
+import { View } from "react-native";
 import { Button } from "../../primitives/Button";
-import { Text } from "../../components/Text";
+import { Text } from "../../primitives/Text";
 
 type ProfileHeaderProps = {
   authUser: AuthUser;
@@ -11,16 +11,16 @@ type ProfileHeaderProps = {
 
 export function ProfileHeader({ authUser }: ProfileHeaderProps) {
   return (
-    <Box>
-      <Text variant="title16" alignSelf="center" mb="s40">
+    <View>
+      <Text variant="heading" className="mb-10 self-center">
         Perfil
       </Text>
 
-      <Text variant="title16" mb="s16">
+      <Text variant="heading" className="mb-4">
         Informações da Conta.
       </Text>
 
-      <Box rowGap="s4">
+      <View className="gap-y-1">
         <LineItem
           testID="profile-fullname"
           label="Nome"
@@ -31,34 +31,32 @@ export function ProfileHeader({ authUser }: ProfileHeaderProps) {
           label="Membro desde"
           value={dateUtils.formatMonthAndYear(authUser.createdAt)}
         />
-      </Box>
+      </View>
 
-      <Box flexDirection="row" columnGap="s16" mt="s16">
-        <Box flex={1}>
-          <Button
-            testID="edit-profile-button"
-            title="Editar perfil"
-            variant="secondary"
-            onPress={() =>
-              router.navigate({
-                pathname: "/update-profile",
-                params: {
-                  fullname: authUser.fullname,
-                  email: authUser.email,
-                },
-              })
-            }
-          />
-        </Box>
-        <Box flex={1}>
-          <Button
-            title="Alterar senha"
-            variant="secondary"
-            onPress={() => router.navigate("/update-password")}
-          />
-        </Box>
-      </Box>
-    </Box>
+      <View className="mt-4 flex-row gap-x-4">
+        <Button
+          testID="edit-profile-button"
+          title="Editar perfil"
+          variant="secondary"
+          className="flex-1"
+          onPress={() =>
+            router.navigate({
+              pathname: "/update-profile",
+              params: {
+                fullname: authUser.fullname,
+                email: authUser.email,
+              },
+            })
+          }
+        />
+        <Button
+          title="Alterar senha"
+          variant="secondary"
+          className="flex-1"
+          onPress={() => router.navigate("/update-password")}
+        />
+      </View>
+    </View>
   );
 }
 
@@ -72,13 +70,13 @@ function LineItem({
   testID?: string;
 }) {
   return (
-    <Box flexDirection="row" justifyContent="space-between">
-      <Text variant="text14" color="gray2">
+    <View className="flex-row justify-between">
+      <Text variant="body-sm" className="text-muted">
         {label}
       </Text>
-      <Text testID={testID} variant="text14" color="text">
+      <Text testID={testID} variant="body-sm">
         {value}
       </Text>
-    </Box>
+    </View>
   );
 }

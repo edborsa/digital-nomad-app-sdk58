@@ -3,7 +3,6 @@ import { useCityFindGroupedByCategory } from "@/src/domain/city/operations/useCi
 import { CitiesGroupedByCategoryItem } from "@/src/ui/components/CitiesGroupedByCategoryItem";
 import { Screen } from "@/src/ui/components/Screen";
 import { Separator } from "@/src/ui/components/Separator";
-import { useAppTheme } from "@/src/ui/theme/useAppTheme";
 import { useScrollToTop } from "expo-router";
 import { useRef } from "react";
 import { FlatList, ListRenderItemInfo } from "react-native";
@@ -11,7 +10,6 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function ExploreScreen() {
   const { data } = useCityFindGroupedByCategory();
-  const { spacing } = useAppTheme();
   const { top } = useSafeAreaInsets();
 
   const flatListRef = useRef(null);
@@ -29,10 +27,8 @@ export default function ExploreScreen() {
         renderItem={renderItem}
         keyExtractor={(item) => item.category.id}
         ItemSeparatorComponent={Separator}
-        contentContainerStyle={{
-          paddingTop: top,
-          paddingBottom: spacing.padding,
-        }}
+        contentContainerClassName="pb-4"
+        contentContainerStyle={{ paddingTop: top }}
       />
     </Screen>
   );

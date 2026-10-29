@@ -1,4 +1,4 @@
-import { Box } from "../../components/Box";
+import { View } from "react-native";
 import { Button } from "../../primitives/Button";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -16,7 +16,7 @@ export function SignUpForm({ onSubmit }: SignUpFormProps) {
   });
 
   return (
-    <Box>
+    <View>
       <Controller
         control={control}
         name="fullname"
@@ -87,6 +87,6 @@ export function SignUpForm({ onSubmit }: SignUpFormProps) {
         title="Criar conta"
         onPress={() => handleSubmit(onSubmit)()}
       />
-    </Box>
+    </View>
   );
 }

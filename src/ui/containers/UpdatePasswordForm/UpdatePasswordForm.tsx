@@ -1,9 +1,9 @@
-import { Box } from "../../components/Box";
+import { View } from "react-native";
 import { Button } from "../../primitives/Button";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
-import { Text } from "../../components/Text";
+import { Text } from "../../primitives/Text";
 import { TextInput } from "../../components/TextInput";
 import {
   updatePasswordSchema,
@@ -20,8 +20,8 @@ export function UpdatePasswordForm({ onSubmit }: UpdatePasswordFormProps) {
   });
 
   return (
-    <Box>
-      <Text mb="s16">
+    <View>
+      <Text className="mb-4">
         Recomendamos usar uma combinação de letras, números e símbolos para
         maior proteção.
       </Text>
@@ -78,6 +78,6 @@ export function UpdatePasswordForm({ onSubmit }: UpdatePasswordFormProps) {
         title="Atualizar"
         onPress={() => handleSubmit(onSubmit)()}
       />
-    </Box>
+    </View>
   );
 }

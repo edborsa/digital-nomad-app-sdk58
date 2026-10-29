@@ -1,6 +1,6 @@
 import { City } from "@/src/domain/city/City";
-import { Box } from "../components/Box";
-import { Text } from "../components/Text";
+import { View } from "react-native";
+import { Text } from "../primitives/Text";
 
 type CityDetailsInfoProps = Pick<City, "name" | "country" | "description">;
 
@@ -10,14 +10,14 @@ export function CityDetailsInfo({
   description,
 }: CityDetailsInfoProps) {
   return (
-    <Box padding="padding">
-      <Text testID="city-details-name" variant="title28" mb="s2">
+    <View className="p-4">
+      <Text testID="city-details-name" variant="display" className="mb-0.5">
         {name}
       </Text>
-      <Text variant="text18" mb="s24">
+      <Text variant="body-lg" className="mb-6">
         {country}
       </Text>
-      <Text variant="text14">{description}</Text>
-    </Box>
+      <Text variant="body-sm">{description}</Text>
+    </View>
   );
 }

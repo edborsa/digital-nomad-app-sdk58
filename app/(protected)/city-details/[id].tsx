@@ -1,13 +1,13 @@
 import { useCityFindById } from "@/src/domain/city/operations/useCityFindById";
 import { Divider } from "@/src/ui/components/Divider";
 import { Screen } from "@/src/ui/components/Screen";
-import { Text } from "@/src/ui/components/Text";
 import { BottomSheetMap } from "@/src/ui/containers/BottomSheetMap";
 import { CityDetailsHeader } from "@/src/ui/containers/CityDetailsHeader";
 import { CityDetailsInfo } from "@/src/ui/containers/CityDetailsInfo";
 import { CityDetailsMap } from "@/src/ui/containers/CityDetailsMap";
 import { CityDetailsRelatedCities } from "@/src/ui/containers/CityDetailsRelatedCities";
 import { CityDetailsTouristAttractions } from "@/src/ui/containers/CityDetailsTouristAttractions";
+import { Text } from "@/src/ui/primitives/Text";
 import { useLocalSearchParams } from "expo-router";
 import { Pressable } from "react-native";
 import Animated, { FadeIn, useSharedValue } from "react-native-reanimated";

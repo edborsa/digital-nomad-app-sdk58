@@ -1,11 +1,10 @@
 import { Image } from "expo-image";
 import { router } from "expo-router";
-import { ScrollView, StyleSheet } from "react-native";
+import { ScrollView, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { City } from "@/src/domain/city/City";
 import { BlackOpacity } from "../components/BlackOpacity";
-import { Box } from "../components/Box";
 import { CategoryPill } from "../components/CategoryPill";
 import { CityFavoriteButton } from "../components/CityFavoriteButton";
 import { IconButton } from "../components/IconButton";
@@ -24,19 +23,16 @@ export function CityDetailsHeader({
 }: CityDetailsHeaderProps) {
   const { top } = useSafeAreaInsets();
   return (
-    <Box>
-      <Box width="100%" height={250}>
+    <View>
+      <View className="h-[250px] w-full overflow-hidden rounded-br-[40px]">
         <Image
           source={coverImage}
-          style={[StyleSheet.absoluteFill, { borderBottomRightRadius: 40 }]}
+          className="absolute inset-0"
           transition={300}
         />
         <BlackOpacity />
-        <Box
-          flexDirection="row"
-          justifyContent="space-between"
-          alignItems="center"
-          padding="padding"
+        <View
+          className="flex-row items-center justify-between px-4"
           style={{ paddingTop: top }}
         >
           <IconButton
@@ -46,8 +42,8 @@ export function CityDetailsHeader({
             onPress={() => router.back()}
           />
           <CityFavoriteButton size={30} city={{ id, isFavorite }} onImage />
-        </Box>
-      </Box>
+        </View>
+      </View>
 
       <ScrollView
         horizontal
@@ -55,12 +51,12 @@ export function CityDetailsHeader({
         showsHorizontalScrollIndicator={false}
         style={{ marginTop: -PILL_HEIGHT / 2 }}
       >
-        <Box flexDirection="row" gap="s8" paddingHorizontal="padding">
+        <View className="flex-row gap-2 px-4">
           {categories.map((category) => (
             <CategoryPill active={true} key={category.id} category={category} />
           ))}
-        </Box>
+        </View>
       </ScrollView>
-    </Box>
+    </View>
   );
 }
