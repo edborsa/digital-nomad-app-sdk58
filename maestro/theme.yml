@@ -1,0 +1,37 @@
+appId: com.eduardoborsa.digitalnomadapp
+---
+- launchApp:
+    clearState: true
+- runFlow: subflows/sign-in.yml
+
+- tapOn:
+    id: tab-profile
+- scrollUntilVisible:
+    element:
+      id: theme-option-dark
+- assertVisible:
+    id: theme-option-system
+    selected: true
+- tapOn:
+    id: theme-option-dark
+- assertVisible:
+    id: theme-option-dark
+    selected: true
+
+# The choice is kept on the device, so it survives quitting the app
+- stopApp
+- launchApp
+- runFlow:
+    when:
+      visible:
+        id: sign-in-button
+    commands:
+      - runFlow: subflows/sign-in.yml
+- tapOn:
+    id: tab-profile
+- scrollUntilVisible:
+    element:
+      id: theme-option-dark
+- assertVisible:
+    id: theme-option-dark
+    selected: true

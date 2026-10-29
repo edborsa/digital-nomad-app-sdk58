@@ -1,5 +1,5 @@
 import { useStorage } from "@/src/infra/storage/StorageContext";
-import { router, SplashScreen } from "expo-router";
+import { router } from "expo-router";
 import React, { useContext, useEffect, useState } from "react";
 import { AuthUser } from "./AuthUser";
 
@@ -9,8 +9,6 @@ type AuthState = {
   saveAuthUser: (authUser: AuthUser) => Promise<void>;
   removeAuthUser: () => Promise<void>;
 };
-
-SplashScreen.preventAutoHideAsync();
 
 export const AuthContext = React.createContext<AuthState>({
   authUser: null,
@@ -61,12 +59,6 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     loadAuthUser();
   }, []);
-
-  useEffect(() => {
-    if (isReady) {
-      SplashScreen.hide();
-    }
-  }, [isReady]);
 
   return (
     <AuthContext.Provider

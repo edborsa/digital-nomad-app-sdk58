@@ -63,9 +63,6 @@ export function renderApp(options?: {
     options?.repositories ?? {},
   );
 
-  // Every render starts like a fresh install: no Session left over from a previous test
-  inMemoryStorage.clear();
-
   const client = new QueryClient(queryClientOptions);
 
   const FinalAuthProvider = options?.isAuthenticated

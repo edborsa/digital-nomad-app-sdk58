@@ -1,9 +1,9 @@
 import { IStorage } from "../IStorage";
 
 class InMemoryStorage implements IStorage {
-  private store = new Map<string, any>();
+  private store = new Map<string, unknown>();
 
-  async setItem(key: string, value: any): Promise<void> {
+  async setItem<IData>(key: string, value: IData): Promise<void> {
     this.store.set(key, value);
   }
 
@@ -18,9 +18,17 @@ class InMemoryStorage implements IStorage {
     this.store.delete(key);
   }
 
-  // Optional helper for testing
+  // Helpers for testing
   clear(): void {
     this.store.clear();
+  }
+
+  snapshot(): Map<string, unknown> {
+    return new Map(this.store);
+  }
+
+  restore(snapshot: Map<string, unknown>): void {
+    this.store = new Map(snapshot);
   }
 }
 //using a singleton so will can call clear when testing
