@@ -5,13 +5,19 @@ import {
   CityToggleFavoriteParams,
   ICityRepo,
 } from "@/src/domain/city/ICityRepo";
+import { categories } from "@/src/infra/repositories/adapters/inMemory/data/categories";
 import { cities } from "@/src/infra/repositories/adapters/inMemory/data/cities";
 
 export class InMemoryCityRepo implements ICityRepo {
   async findGroupedByCategory(): Promise<CitiesGroupedByCategory[]> {
-    return cities.flatMap((city) => {
-      const [category] = city.categories;
-      return category ? [{ category, cities: [city] }] : [];
+    // A category appears once (Explore keys its list by category), holding every city in it
+    return categories.flatMap((category) => {
+      const citiesInCategory = cities.filter((city) =>
+        city.categories.some(({ id }) => id === category.id),
+      );
+      return citiesInCategory.length > 0
+        ? [{ category, cities: citiesInCategory }]
+        : [];
     });
   }
   async toggleFavorite(params: CityToggleFavoriteParams): Promise<void> {

@@ -10,7 +10,7 @@ export function CitiesGroupedByCategoryItem({
   cities,
 }: CitiesGroupedByCategory) {
   return (
-    <View>
+    <View testID={`category-group-${category.id}`}>
       <View className="ml-4 flex-row">
         <Icon name={categoryIconMap[category.code]} className="text-primary" />
         <View className="mb-4 ml-3">
