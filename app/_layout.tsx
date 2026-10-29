@@ -7,8 +7,6 @@ import { RepositoryProvider } from "@/src/infra/repositories/RepositoryProvider"
 import { AsyncStorage } from "@/src/infra/storage/adapters/AsyncStorage";
 import { StorageProvider } from "@/src/infra/storage/StorageContext";
 import { AppStack } from "@/src/ui/navigation/AppStack";
-import theme from "@/src/ui/theme/theme";
-import { ThemeProvider } from "@shopify/restyle";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useFonts } from "expo-font";
 import { StatusBar } from "expo-status-bar";
@@ -56,11 +54,9 @@ export default function RootLayout() {
         <AuthProvider>
           <FeedbackProvider value={ToastFeedback}>
             <RepositoryProvider value={InMemoryRepository}>
-              <ThemeProvider theme={theme}>
-                <AppStack />
-                <StatusBar style="auto" />
-                <Toast />
-              </ThemeProvider>
+              <AppStack />
+              <StatusBar style="auto" />
+              <Toast />
             </RepositoryProvider>
           </FeedbackProvider>
         </AuthProvider>

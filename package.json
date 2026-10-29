@@ -17,7 +17,6 @@
     "@expo/vector-icons": "^15.0.3",
     "@hookform/resolvers": "^5.1.1",
     "@react-native-async-storage/async-storage": "2.2.0",
-    "@shopify/restyle": "^2.4.5",
     "@tanstack/react-query": "^5.83.0",
     "class-variance-authority": "^0.7.1",
     "date-fns": "^4.1.0",
@@ -79,10 +78,10 @@
     ],
     "coverageThreshold": {
       "global": {
-        "statements": 82.84,
+        "statements": 83.44,
         "branches": 72.86,
-        "functions": 84.47,
-        "lines": 82.4
+        "functions": 84.86,
+        "lines": 83.02
       }
     },
     "setupFiles": [
